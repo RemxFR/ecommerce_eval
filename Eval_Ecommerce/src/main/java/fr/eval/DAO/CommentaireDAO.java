@@ -73,11 +73,14 @@ public class CommentaireDAO implements ICrud<Commentaire> {
 			this.transaction = this.session.beginTransaction();
 
 			Commentaire cToDelete = this.getById(id);
-
+			
+			if(cToDelete != null) {
 			this.transaction.begin();
 			this.session.delete(cToDelete);
 			this.transaction.commit();
-
+			} else {
+				System.out.println("Pas de commentaire trouvé avec cet id.");
+			}
 		} catch (Exception e) {
 			this.transaction.rollback();
 		} finally {

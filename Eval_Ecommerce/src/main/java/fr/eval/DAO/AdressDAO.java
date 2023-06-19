@@ -25,11 +25,8 @@ public class AdressDAO implements ICrud<Adress> {
 		this.transaction.commit();
 		
 		} catch (Exception e) {
-		
 			this.transaction.rollback();
-		
 		} finally {
-			
 		this.closeSession(this.session);
 		}
 	}
@@ -60,10 +57,14 @@ public class AdressDAO implements ICrud<Adress> {
 
 			Adress adressToDelete = this.getById(id);
 
+			if(adressToDelete != null) {
 			this.transaction.begin();
 			this.session.delete(adressToDelete);
 			this.transaction.commit();
-
+			} else {
+				System.out.println("Pas d'adresse trouvée avec cette id.");
+			}
+			
 		} catch (Exception e) {
 			this.transaction.rollback();
 		} finally {

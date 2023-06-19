@@ -75,10 +75,14 @@ public class UtilisateurDAO implements ICrud<Utilisateur> {
 
 			Utilisateur uToDelete = this.getById(id);
 
+			if(uToDelete != null) {
 			this.transaction.begin();
 			this.session.delete(uToDelete);
 			this.transaction.commit();
-
+			} else {
+				System.out.println("Pas d'utilisateur trouvé avec cet id.");
+			}
+			
 		} catch (Exception e) {
 			this.transaction.rollback();
 		} finally {

@@ -12,26 +12,26 @@ public class ParamsDAO implements ICrud<Params> {
 
 	private Session session = null;
 	private Transaction transaction = null;
-	
+
 	@Override
 	public void add(Params t) throws Exception {
 		try {
-			
+
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
 			this.transaction.begin();
 			this.session.save(t);
 			this.transaction.commit();
-			
-			} catch (Exception e) {
-			
-				this.transaction.rollback();
-			
-			} finally {
-				
+
+		} catch (Exception e) {
+
+			this.transaction.rollback();
+
+		} finally {
+
 			this.closeSession(this.session);
-			}
-		
+		}
+
 	}
 
 	@Override
@@ -57,13 +57,13 @@ public class ParamsDAO implements ICrud<Params> {
 			this.transaction.begin();
 			this.session.update(t);
 			this.transaction.commit();
-			
+
 		} catch (Exception e) {
 			this.transaction.rollback();
 		} finally {
 			this.closeSession(this.session);
 		}
-		
+
 	}
 
 	@Override
@@ -73,10 +73,13 @@ public class ParamsDAO implements ICrud<Params> {
 			this.transaction = this.session.beginTransaction();
 
 			Params paramsToDelete = this.getById(id);
-
-			this.transaction.begin();
-			this.session.delete(paramsToDelete);
-			this.transaction.commit();
+			if (paramsToDelete != null) {
+				this.transaction.begin();
+				this.session.delete(paramsToDelete);
+				this.transaction.commit();
+			} else {
+				System.out.println("Pas de clé de chiffrage trouvée avec cet id.");
+			}
 
 		} catch (Exception e) {
 			this.transaction.rollback();
@@ -84,17 +87,14 @@ public class ParamsDAO implements ICrud<Params> {
 			this.closeSession(this.session);
 		}
 
-		
 	}
 
 	@Override
 	public void closeSession(Session session) throws Exception {
-		if(session != null && session.isOpen()) {
+		if (session != null && session.isOpen()) {
 			session.close();
 		}
-		
+
 	}
 
-	
-	
 }

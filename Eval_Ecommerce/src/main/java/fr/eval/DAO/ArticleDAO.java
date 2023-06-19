@@ -80,9 +80,13 @@ public class ArticleDAO  implements ICrud<Article>{
 
 			Article articleToDelete = this.getById(id);
 
+			if(articleToDelete != null) {
 			this.transaction.begin();
 			this.session.delete(articleToDelete);
 			this.transaction.commit();
+			} else {
+				System.out.println("Aucun Article trouvé avec cet id.");
+			}
 
 		} catch (Exception e) {
 			this.transaction.rollback();

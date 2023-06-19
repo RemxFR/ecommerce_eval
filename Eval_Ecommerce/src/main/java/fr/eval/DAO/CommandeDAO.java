@@ -73,11 +73,14 @@ public class CommandeDAO implements ICrud<Commande> {
 			this.transaction = this.session.beginTransaction();
 
 			Commande cToDelete = this.getById(id);
-
+			
+			if(cToDelete != null) {
 			this.transaction.begin();
 			this.session.delete(cToDelete);
 			this.transaction.commit();
-
+			} else {
+				System.out.println("Pas de commande trouvée avec cet id.");
+			}
 		} catch (Exception e) {
 			this.transaction.rollback();
 		} finally {

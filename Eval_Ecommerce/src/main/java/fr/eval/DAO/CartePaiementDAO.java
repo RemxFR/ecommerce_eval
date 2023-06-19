@@ -75,10 +75,14 @@ public class CartePaiementDAO implements ICrud<CartePaiement> {
 
 			CartePaiement cpToDelete = this.getById(id);
 
+			if(cpToDelete != null) {
 			this.transaction.begin();
 			this.session.delete(cpToDelete);
 			this.transaction.commit();
-
+			} else {
+				System.out.println("Pas de carte de paiement trouvée avec cet id.");
+			}
+			
 		} catch (Exception e) {
 			this.transaction.rollback();
 		} finally {

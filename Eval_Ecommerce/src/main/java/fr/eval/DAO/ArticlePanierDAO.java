@@ -75,10 +75,14 @@ public class ArticlePanierDAO implements ICrud<ArticlePanier> {
 
 			ArticlePanier apToDelete = this.getById(id);
 
+			if(apToDelete != null) {
 			this.transaction.begin();
 			this.session.delete(apToDelete);
 			this.transaction.commit();
-
+			} else {
+				System.out.println("Pas de panier trouvé avec cet id.");
+			}
+			
 		} catch (Exception e) {
 			this.transaction.rollback();
 		} finally {

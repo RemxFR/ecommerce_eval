@@ -75,10 +75,13 @@ public class LigneDeCommandeDAO implements ICrud<LigneDeCommande> {
 
 			LigneDeCommande ldcToDelete = this.getById(id);
 
-			this.transaction.begin();
-			this.session.delete(ldcToDelete);
-			this.transaction.commit();
-
+			if (ldcToDelete != null) {
+				this.transaction.begin();
+				this.session.delete(ldcToDelete);
+				this.transaction.commit();
+			} else {
+				System.out.println("Pas de ligne de commande trouvée avec cet id.");
+			}
 		} catch (Exception e) {
 			this.transaction.rollback();
 		} finally {

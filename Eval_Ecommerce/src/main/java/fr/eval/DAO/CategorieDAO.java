@@ -73,10 +73,14 @@ public class CategorieDAO implements ICrud<Categorie> {
 
 			Categorie cToDelete = this.getById(id);
 
+			if(cToDelete != null) {
 			this.transaction.begin();
 			this.session.delete(cToDelete);
 			this.transaction.commit();
-
+			} else {
+				System.out.println("Pas de catégorie trouvé avec cet id.");
+			}
+			
 		} catch (Exception e) {
 			this.transaction.rollback();
 		} finally {
