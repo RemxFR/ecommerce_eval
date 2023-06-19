@@ -8,11 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "t_commentaire")
+@NamedQueries ({
+	@NamedQuery(name = "Commentaire::FindAdressById", query = "FROM Commentaire c WHERE id= :id"),
+	@NamedQuery(name = "Commentaire::FindAll", query = "FROM Commentaire c")
+})
 public class Commentaire {
 
 	@Id

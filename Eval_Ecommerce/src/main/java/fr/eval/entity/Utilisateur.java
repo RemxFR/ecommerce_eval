@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,6 +24,10 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "t_utilisateur")
+@NamedQueries ({
+	@NamedQuery(name = "Utilisateur::FindAdressById", query = "FROM Utilisateur u WHERE id= :id"),
+	@NamedQuery(name = "Utilisateur::FindAll", query = "FROM Utilisateur u")
+})
 public class Utilisateur {
 
 	@Id

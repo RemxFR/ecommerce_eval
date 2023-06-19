@@ -1,6 +1,5 @@
 package fr.eval.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "t_ligne_de_commande")
+@NamedQueries ({
+	@NamedQuery(name = "LigneDeCommande::FindAdressById", query = "FROM LigneDeCommande l WHERE id= :id"),
+	@NamedQuery(name = "LigneDeCommande::FindAll", query = "FROM LigneDeCommande l")
+})
 public class LigneDeCommande {
 
 	@Id

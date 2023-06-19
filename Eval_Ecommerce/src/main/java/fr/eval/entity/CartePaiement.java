@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,6 +20,10 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "t_carte_paiement")
+@NamedQueries ({
+	@NamedQuery(name = "CartePaiement::FindAdressById", query = "FROM CartePaiement cp WHERE id= :id"),
+	@NamedQuery(name = "CartePaiement::FindAll", query = "FROM CartePaiement cp")
+})
 public class CartePaiement {
 
 	@Id

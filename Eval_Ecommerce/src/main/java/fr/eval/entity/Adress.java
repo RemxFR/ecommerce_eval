@@ -6,12 +6,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+
 @Entity
 @Table(name = "t_adresse")
+@NamedQueries ({
+	@NamedQuery(name = "Adress::FindAdressById", query = "FROM Adress a WHERE id= :id"),
+	@NamedQuery(name = "Adress::FindAll", query = "FROM Adress a")
+})
 public class Adress {
 
 	@Id

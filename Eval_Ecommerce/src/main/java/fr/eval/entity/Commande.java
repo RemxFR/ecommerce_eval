@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -21,6 +23,10 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "t_commande")
+@NamedQueries ({
+	@NamedQuery(name = "Commande::FindAdressById", query = "FROM Commande c WHERE id= :id"),
+	@NamedQuery(name = "Commande::FindAll", query = "FROM Commande c")
+})
 public class Commande {
 
 	@Id

@@ -9,12 +9,18 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "t_categorie")
+@NamedQueries ({
+	@NamedQuery(name = "Categorie::FindAdressById", query = "FROM Categorie c WHERE id= :id"),
+	@NamedQuery(name = "Categorie::FindAll", query = "FROM Categorie c")
+})
 public class Categorie {
 
 	@Id

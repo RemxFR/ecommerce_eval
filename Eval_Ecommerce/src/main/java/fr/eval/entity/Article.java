@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -23,6 +25,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "t_article")
+@NamedQueries ({
+	@NamedQuery(name = "Article::FindAdressById", query = "FROM Article a WHERE id= :id"),
+	@NamedQuery(name = "Article::FindAll", query = "FROM Article a")
+})
 public class Article {
 
 	@Id
