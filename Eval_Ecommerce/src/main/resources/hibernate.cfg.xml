@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC
-		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory name="evalwebservice">
+ <session-factory>
   <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
   <property name="hibernate.connection.password">M3rc!JsQL</property>
   <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ecommerceDoranco_db</property>
@@ -13,10 +12,18 @@
   <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
   <property name="connection.pool_size">3</property>
   <property name="current_session_context_class">thread</property>
-  <property name="hibernate.hbm2ddl.auto">update</property>
+  <property name="hibernate.hbm2ddl.auto">create</property>
   <property name="hibernate.enable_lazy_load_no_trans">true</property>
   <property name="hibernate.charSet">UTF-8</property>
-  
-  <mapping class="fr.doranco.rest.beans.Employe"/>
-  </session-factory>
+  <mapping class="fr.eval.entity.Article"/>
+  <mapping class="fr.eval.entity.ArticlePanier"/>
+  <mapping class="fr.eval.entity.Adress"/>
+  <mapping class="fr.eval.entity.CartePaiement"/>
+  <mapping class="fr.eval.entity.Categorie"/>
+  <mapping class="fr.eval.entity.Commande"/>
+  <mapping class="fr.eval.entity.Commentaire"/>
+  <mapping class="fr.eval.entity.LigneDeCommande"/>
+  <mapping class="fr.eval.entity.Params"/>
+  <mapping class="fr.eval.entity.Utilisateur"/>
+ </session-factory>
 </hibernate-configuration>

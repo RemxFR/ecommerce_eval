@@ -77,11 +77,11 @@ public class Utilisateur {
 	
 	@OneToMany(cascade = CascadeType.ALL,
 			mappedBy = "utilisateur",
-			fetch = FetchType.EAGER)
+			fetch = FetchType.LAZY)
 	private List<Commentaire> commentaires;
 	
 	@OneToMany(cascade = CascadeType.ALL,
-			mappedBy = "utilisateur",
+			mappedBy = "utilisateur", 
 			fetch = FetchType.EAGER)
 	private Set<ArticlePanier> panier;
 

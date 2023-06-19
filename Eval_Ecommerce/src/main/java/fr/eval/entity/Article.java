@@ -63,11 +63,6 @@ public class Article {
 	@Column(name = "commentaires")
 	private Set<Commentaire> commentaires;
 	
-	@OneToMany(cascade = CascadeType.ALL,
-			mappedBy = "utilisateur",
-			fetch = FetchType.EAGER)
-	private List<Article> articles;
-	
 	@ManyToOne
 	@JoinColumn(name = "categorie_id", referencedColumnName = "id", nullable = false)
 	private Categorie categorie;

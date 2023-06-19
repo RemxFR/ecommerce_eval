@@ -36,7 +36,7 @@ public class LigneDeCommande {
 	@JoinColumn(name = "commande_id", nullable = false)
 	private Commande commande;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "article_id", referencedColumnName = "id")
 	private Article article;
 

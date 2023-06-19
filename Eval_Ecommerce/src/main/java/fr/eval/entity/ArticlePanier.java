@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -29,10 +30,52 @@ public class ArticlePanier {
 	@Column(name = "quantite", nullable = false)
 	private int quantite;
 	
-	@OneToOne(cascade = CascadeType.ALL,
-			mappedBy = "panier",
-			fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "utilisateur_id", referencedColumnName = "id")
 	private Utilisateur utilisateur;
+
+	public ArticlePanier() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ArticlePanier(@NotEmpty Article article, @NotEmpty int quantite, Utilisateur utilisateur) {
+		super();
+		this.article = article;
+		this.quantite = quantite;
+		this.utilisateur = utilisateur;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
+	public int getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 	
 }

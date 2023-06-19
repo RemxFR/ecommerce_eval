@@ -52,18 +52,15 @@ public class Commande {
 	private double totalGeneral;
 	
 	@NotEmpty
-	@OneToOne(cascade = CascadeType.ALL)
-	@Column(name = "adresseFacturation", nullable = false)
+	@OneToOne
 	private Adress adresseFacturation;
 	
 	@NotEmpty
-	@OneToOne(cascade = CascadeType.ALL)
-	@Column(name = "adresseLivraison", nullable = false)
+	@OneToOne
 	private Adress adresseLivraison;
 	
 	@NotEmpty
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cpDefaut", referencedColumnName = "id", nullable = false)
+	@OneToOne
 	private CartePaiement cpDefaut;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
