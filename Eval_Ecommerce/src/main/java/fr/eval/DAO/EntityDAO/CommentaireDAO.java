@@ -1,11 +1,15 @@
 package fr.eval.DAO.EntityDAO;
 
+import java.util.List;
+import java.util.Map;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import fr.eval.DAO.Interface.ICrud;
 import fr.eval.DAO.connexion.ConnexionBdd;
+import fr.eval.entity.Article;
 import fr.eval.entity.Commentaire;
 
 public class CommentaireDAO implements ICrud<Commentaire> {
@@ -39,10 +43,10 @@ public class CommentaireDAO implements ICrud<Commentaire> {
 		try {
 
 			this.session = ConnexionBdd.getSession();
-			Query<Commentaire> query = this.session.createNamedQuery("Commentaire::FindAdressById", Commentaire.class);
-			query.setParameter("id", id);
-			return query.uniqueResult();
-
+//			Query<Commentaire> query = this.session.createNamedQuery("Commentaire::FindAdressById", Commentaire.class);
+//			query.setParameter("id", id);
+//			return query.uniqueResult();
+			return null;
 		} finally {
 
 			this.closeSession(session);
@@ -73,11 +77,11 @@ public class CommentaireDAO implements ICrud<Commentaire> {
 			this.transaction = this.session.beginTransaction();
 
 			Commentaire cToDelete = this.getById(id);
-			
-			if(cToDelete != null) {
-			this.transaction.begin();
-			this.session.delete(cToDelete);
-			this.transaction.commit();
+
+			if (cToDelete != null) {
+				this.transaction.begin();
+				this.session.delete(cToDelete);
+				this.transaction.commit();
 			} else {
 				System.out.println("Pas de commentaire trouvé avec cet id.");
 			}
@@ -87,6 +91,19 @@ public class CommentaireDAO implements ICrud<Commentaire> {
 			this.closeSession(this.session);
 		}
 
+	}
+
+	public List<Commentaire> getCommentaireList() throws Exception {
+		Transaction transaction = null;
+		try {
+			this.session = ConnexionBdd.getSession();
+
+			Query<Commentaire> query = this.session.createNamedQuery("Commentaire::FindAll", Commentaire.class);
+			return query.getResultList();
+
+		} finally {
+			this.closeSession(this.session);
+		}
 	}
 
 	@Override

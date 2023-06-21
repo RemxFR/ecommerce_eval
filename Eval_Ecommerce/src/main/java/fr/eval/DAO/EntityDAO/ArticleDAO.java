@@ -1,5 +1,9 @@
 package fr.eval.DAO.EntityDAO;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -8,6 +12,7 @@ import fr.eval.DAO.Interface.ICrud;
 import fr.eval.DAO.connexion.ConnexionBdd;
 import fr.eval.entity.Adress;
 import fr.eval.entity.Article;
+import fr.eval.entity.Commentaire;
 
 public class ArticleDAO  implements ICrud<Article>{
 
@@ -102,6 +107,27 @@ public class ArticleDAO  implements ICrud<Article>{
 		}
 
 		
+	}
+
+	public Map<Article, List<Commentaire>> getCommentairesParArticle() throws Exception {
+		
+		Map<Article, List<Commentaire>> map = new HashMap<>();
+		
+		try {
+
+			this.session = ConnexionBdd.getSession();
+			Query<Article> query = this.session.createNamedQuery("Article::FindAll", Article.class);
+			List<Article> articles = query.getResultList();
+			
+			for (Article article : articles) {
+				map.put(article, (List) article.getCommentaires());
+			}
+			return map;
+
+		} finally {
+
+			this.closeSession(session);
+		}
 	}
 	
 	

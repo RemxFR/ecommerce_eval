@@ -29,18 +29,15 @@ public class Commentaire {
 	@Column(name = "texte", nullable = false)
 	private String texte;
 	
-	@NotEmpty
 	@Column(name = "note", nullable = false)
 	private int note;
 	
-	@NotEmpty
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "article_id", referencedColumnName = "id", nullable = false)
 	private Article article;
 	
-	@NotEmpty
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "utilisateur_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "utilisateur_id", referencedColumnName = "id")
 	private Utilisateur utilisateur;
 
 	public Commentaire() {
