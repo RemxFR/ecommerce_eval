@@ -1,4 +1,4 @@
-package fr.eval.DAO;
+package fr.eval.DAO.EntityDAO;
 
 import org.hibernate.Query;
 import org.hibernate.Session;

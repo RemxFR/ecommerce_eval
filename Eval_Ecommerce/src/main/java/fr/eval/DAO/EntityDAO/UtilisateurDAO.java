@@ -1,4 +1,6 @@
-package fr.eval.DAO;
+package fr.eval.DAO.EntityDAO;
+
+import javax.persistence.RollbackException;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,22 +13,23 @@ import fr.eval.entity.Utilisateur;
 public class UtilisateurDAO implements ICrud<Utilisateur> {
 
 	private Session session = null;
-	private Transaction transaction = null;
 
 	@Override
-	public void add(Utilisateur t) throws Exception {
-
+	public void add(Utilisateur ut) throws Exception {
+		System.out.println("-----Entrée dans add DAO -----");
+		Transaction transaction = null;
 		try {
 
 			this.session = ConnexionBdd.getSession();
-			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
-			this.session.save(t);
-			this.transaction.commit();
 
-		} catch (Exception e) {
+			transaction = this.session.beginTransaction();
+			System.out.println("ut password & name: " + ut.getNom() + ", " + ut.getPassword());
+			this.session.save(ut);
+			transaction.commit();
 
-			this.transaction.rollback();
+		} catch (RollbackException e) {
+
+			transaction.rollback();
 
 		} finally {
 
@@ -40,8 +43,24 @@ public class UtilisateurDAO implements ICrud<Utilisateur> {
 		try {
 
 			this.session = ConnexionBdd.getSession();
-			Query<Utilisateur> query = this.session.createNamedQuery("Utilisateur::FindAdressById", Utilisateur.class);
+			Query<Utilisateur> query = this.session.createNamedQuery("Utilisateur::FindUtilisateurById",
+					Utilisateur.class);
 			query.setParameter("id", id);
+			return query.uniqueResult();
+
+		} finally {
+
+			this.closeSession(session);
+		}
+	}
+
+	public Utilisateur getByMail(String mail) throws Exception {
+		try {
+
+			this.session = ConnexionBdd.getSession();
+			Query<Utilisateur> query = this.session.createNamedQuery("Utilisateur::FindUtilisateursByMail",
+					Utilisateur.class);
+			query.setParameter("mail", mail);
 			return query.uniqueResult();
 
 		} finally {
@@ -52,15 +71,16 @@ public class UtilisateurDAO implements ICrud<Utilisateur> {
 
 	@Override
 	public void update(Utilisateur t) throws Exception {
+		Transaction transaction = null;
 		try {
 			this.session = ConnexionBdd.getSession();
-			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
+			transaction = this.session.beginTransaction();
+			transaction.begin();
 			this.session.update(t);
-			this.transaction.commit();
+			transaction.commit();
 
 		} catch (Exception e) {
-			this.transaction.rollback();
+			transaction.rollback();
 		} finally {
 			this.closeSession(this.session);
 		}
@@ -69,22 +89,23 @@ public class UtilisateurDAO implements ICrud<Utilisateur> {
 
 	@Override
 	public void deleteById(long id) throws Exception {
+		Transaction transaction = null;
 		try {
 			this.session = ConnexionBdd.getSession();
-			this.transaction = this.session.beginTransaction();
+			transaction = this.session.beginTransaction();
 
 			Utilisateur uToDelete = this.getById(id);
 
-			if(uToDelete != null) {
-			this.transaction.begin();
-			this.session.delete(uToDelete);
-			this.transaction.commit();
+			if (uToDelete != null) {
+				transaction.begin();
+				this.session.delete(uToDelete);
+				transaction.commit();
 			} else {
 				System.out.println("Pas d'utilisateur trouvé avec cet id.");
 			}
-			
+
 		} catch (Exception e) {
-			this.transaction.rollback();
+			transaction.rollback();
 		} finally {
 			this.closeSession(this.session);
 		}

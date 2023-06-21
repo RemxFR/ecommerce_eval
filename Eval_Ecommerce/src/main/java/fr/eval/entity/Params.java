@@ -24,14 +24,12 @@ public class Params {
 
 	@Lob
 	@Column(name = "cle_mdp", 
-			columnDefinition = "TINYBLOB", 
-			nullable = false, updatable = false)
+			columnDefinition = "TINYBLOB")
 	private byte [] cle_cryptage_mdp;
 
 	@Lob
 	@Column(name = "cle_cp",
-			columnDefinition = "TINYBLOB",
-			nullable = false, updatable = false)
+			columnDefinition = "TINYBLOB")
 	private byte[] cle_cryptage_cp;
 
 	public Params() {

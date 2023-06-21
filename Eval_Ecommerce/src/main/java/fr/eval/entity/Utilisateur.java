@@ -21,13 +21,20 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorOrder;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "t_utilisateur")
 @NamedQueries ({
-	@NamedQuery(name = "Utilisateur::FindAdressById", query = "FROM Utilisateur u WHERE id= :id"),
+	@NamedQuery(name = "Utilisateur::FindUtilisateurById", query = "FROM Utilisateur u WHERE id= :id"),
+	@NamedQuery(name = "Utilisateur::FindUtilisateursByMail", query = "FROM Utilisateur u WHERE mail= :mail"),
 	@NamedQuery(name = "Utilisateur::FindAll", query = "FROM Utilisateur u")
 })
+@XmlRootElement(name = "utilisateur")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Utilisateur {
 
 	@Id
@@ -42,18 +49,17 @@ public class Utilisateur {
 	@Column(name = "prenom", length = 25, nullable = false)
 	private String prenom;
 	
-	@NotEmpty
+	
 	@Column(name = "dateNaissance", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dateNaissance;
 	
-	@NotEmpty
-	@Column(name = "isActif", nullable = false)
+	@Column(name = "isActif", columnDefinition = "BOOLEAN")
 	private boolean isActif;
 	
 	@NotEmpty
 	@Column(name = "profil")
-	private Profil profil;
+	private String profil;
 	
 	@NotEmpty
 	@Column(name = "mail", length = 25, nullable = false)
@@ -96,7 +102,7 @@ public class Utilisateur {
 	}
 
 	public Utilisateur(@NotEmpty String nom, @NotEmpty String prenom, @NotEmpty Date dateNaissance,
-			@NotEmpty boolean isActif, @NotEmpty Profil profil, @NotEmpty String email, byte[] password,
+			@NotEmpty boolean isActif, @NotEmpty String profil, @NotEmpty String email, byte[] password,
 			@NotEmpty String telephone, Adress adresse, Set<Commande> commandes, Set<CartePaiement> cartePaiements,
 			List<Commentaire> commentaires, Set<ArticlePanier> panier) {
 		super();
@@ -155,11 +161,11 @@ public class Utilisateur {
 		this.isActif = isActif;
 	}
 
-	public Profil getProfil() {
+	public String getProfil() {
 		return profil;
 	}
 
-	public void setProfil(Profil profil) {
+	public void setProfil(String profil) {
 		this.profil = profil;
 	}
 

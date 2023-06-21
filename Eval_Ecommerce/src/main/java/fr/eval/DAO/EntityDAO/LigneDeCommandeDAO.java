@@ -1,4 +1,4 @@
-package fr.eval.DAO;
+package fr.eval.DAO.EntityDAO;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -6,15 +6,15 @@ import org.hibernate.Transaction;
 
 import fr.eval.DAO.Interface.ICrud;
 import fr.eval.DAO.connexion.ConnexionBdd;
-import fr.eval.entity.Commande;
+import fr.eval.entity.LigneDeCommande;
 
-public class CommandeDAO implements ICrud<Commande> {
+public class LigneDeCommandeDAO implements ICrud<LigneDeCommande> {
 
 	private Session session = null;
 	private Transaction transaction = null;
 
 	@Override
-	public void add(Commande t) throws Exception {
+	public void add(LigneDeCommande t) throws Exception {
 		try {
 
 			this.session = ConnexionBdd.getSession();
@@ -35,11 +35,12 @@ public class CommandeDAO implements ICrud<Commande> {
 	}
 
 	@Override
-	public Commande getById(long id) throws Exception {
+	public LigneDeCommande getById(long id) throws Exception {
 		try {
 
 			this.session = ConnexionBdd.getSession();
-			Query<Commande> query = this.session.createNamedQuery("Commande::FindAdressById", Commande.class);
+			Query<LigneDeCommande> query = this.session.createNamedQuery("LigneDeCommande::FindAdressById",
+					LigneDeCommande.class);
 			query.setParameter("id", id);
 			return query.uniqueResult();
 
@@ -50,7 +51,7 @@ public class CommandeDAO implements ICrud<Commande> {
 	}
 
 	@Override
-	public void update(Commande t) throws Exception {
+	public void update(LigneDeCommande t) throws Exception {
 		try {
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
@@ -72,21 +73,20 @@ public class CommandeDAO implements ICrud<Commande> {
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
 
-			Commande cToDelete = this.getById(id);
-			
-			if(cToDelete != null) {
-			this.transaction.begin();
-			this.session.delete(cToDelete);
-			this.transaction.commit();
+			LigneDeCommande ldcToDelete = this.getById(id);
+
+			if (ldcToDelete != null) {
+				this.transaction.begin();
+				this.session.delete(ldcToDelete);
+				this.transaction.commit();
 			} else {
-				System.out.println("Pas de commande trouvée avec cet id.");
+				System.out.println("Pas de ligne de commande trouvée avec cet id.");
 			}
 		} catch (Exception e) {
 			this.transaction.rollback();
 		} finally {
 			this.closeSession(this.session);
 		}
-
 	}
 
 	@Override

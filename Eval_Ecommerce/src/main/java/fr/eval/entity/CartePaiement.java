@@ -48,6 +48,7 @@ public class CartePaiement {
 	@Column(name = "dateFinValidite", nullable = false, updatable = false)
 	private Date dateFinValidite;
 	
+	@NotEmpty
 	@Lob
 	@Column(name = "cryptogramme", 
 	columnDefinition = "TINYBLOB", 
@@ -58,5 +59,68 @@ public class CartePaiement {
 	@JoinColumn(name = "utilisateur_id", 
 	referencedColumnName = "id")
 	private Utilisateur utilisateur;
+
+	public CartePaiement() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CartePaiement(@NotEmpty String nomProprietaire, @NotEmpty byte[] numero, @NotEmpty Date dateFinValidite,
+			byte[] cryptogramme, Utilisateur utilisateur) {
+		super();
+		this.nomProprietaire = nomProprietaire;
+		this.numero = numero;
+		this.dateFinValidite = dateFinValidite;
+		this.cryptogramme = cryptogramme;
+		this.utilisateur = utilisateur;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNomProprietaire() {
+		return nomProprietaire;
+	}
+
+	public void setNomProprietaire(String nomProprietaire) {
+		this.nomProprietaire = nomProprietaire;
+	}
+
+	public byte[] getNumero() {
+		return numero;
+	}
+
+	public void setNumero(byte[] numero) {
+		this.numero = numero;
+	}
+
+	public Date getDateFinValidite() {
+		return dateFinValidite;
+	}
+
+	public void setDateFinValidite(Date dateFinValidite) {
+		this.dateFinValidite = dateFinValidite;
+	}
+
+	public byte[] getCryptogramme() {
+		return cryptogramme;
+	}
+
+	public void setCryptogramme(byte[] cryptogramme) {
+		this.cryptogramme = cryptogramme;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 	
 }

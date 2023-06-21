@@ -1,6 +1,9 @@
 package fr.eval.main;
 
-import fr.eval.DAO.ArticleDAO;
+import java.util.HashSet;
+import java.util.Set;
+
+import fr.eval.DAO.EntityDAO.ArticleDAO;
 import fr.eval.DAO.connexion.ConnexionBdd;
 
 public class MainTest {
