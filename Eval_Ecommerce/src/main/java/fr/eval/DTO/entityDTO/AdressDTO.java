@@ -12,20 +12,17 @@ public class AdressDTO {
 	
 	private String codePostal;
 	
-	private UtilisateurDTO utilisateur;
-
 	public AdressDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public AdressDTO(int numero, String rue, String ville, String codePostal, UtilisateurDTO utilisateur) {
+	public AdressDTO(int numero, String rue, String ville, String codePostal) {
 		super();
 		this.numero = numero;
 		this.rue = rue;
 		this.ville = ville;
 		this.codePostal = codePostal;
-		this.utilisateur = utilisateur;
 	}
 
 	public long getId() {
@@ -66,14 +63,6 @@ public class AdressDTO {
 
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
-	}
-
-	public UtilisateurDTO getUtilisateur() {
-		return utilisateur;
-	}
-
-	public void setUtilisateur(UtilisateurDTO utilisateur) {
-		this.utilisateur = utilisateur;
 	}
 
 }

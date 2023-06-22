@@ -14,21 +14,17 @@ public class CartePaiementDTO {
 	
 	private String cryptogramme;
 	
-	private UtilisateurDTO utilisateur;
-
 	public CartePaiementDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CartePaiementDTO(String nomProprietaire, String numero, Date dateFinValidite, String cryptogramme,
-			UtilisateurDTO utilisateur) {
+	public CartePaiementDTO(String nomProprietaire, String numero, Date dateFinValidite, String cryptogramme) {
 		super();
 		this.nomProprietaire = nomProprietaire;
 		this.numero = numero;
 		this.dateFinValidite = dateFinValidite;
 		this.cryptogramme = cryptogramme;
-		this.utilisateur = utilisateur;
 	}
 
 	public long getId() {
@@ -71,15 +67,4 @@ public class CartePaiementDTO {
 		this.cryptogramme = cryptogramme;
 	}
 
-	public UtilisateurDTO getUtilisateur() {
-		return utilisateur;
-	}
-
-	public void setUtilisateur(UtilisateurDTO utilisateur) {
-		this.utilisateur = utilisateur;
-	}
-	
-	
-	
-	
 }

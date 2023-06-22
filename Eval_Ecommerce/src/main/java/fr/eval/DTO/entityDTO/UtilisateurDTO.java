@@ -23,13 +23,19 @@ public class UtilisateurDTO {
 	private String password;
 
 	private String telephone;
+	
+	private List<ArticleDTO> panier;
+	
+	private AdressDTO adressDTO;
 
 	public UtilisateurDTO() {
 		super();
 	}
 
+	
+
 	public UtilisateurDTO(String nom, String prenom, String dateNaissance, String profil, String email, String password,
-			String telephone) {
+			String telephone, List<ArticleDTO> panier, AdressDTO adressDTO) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -38,7 +44,11 @@ public class UtilisateurDTO {
 		this.email = email;
 		this.password = password;
 		this.telephone = telephone;
+		this.panier = panier;
+		this.adressDTO = adressDTO;
 	}
+
+
 
 	public long getId() {
 		return id;
@@ -103,5 +113,30 @@ public class UtilisateurDTO {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
+
+
+	public List<ArticleDTO> getPanier() {
+		return panier;
+	}
+
+
+
+	public void setPanier(List<ArticleDTO> panier) {
+		this.panier = panier;
+	}
+
+
+
+	public AdressDTO getAdressDTO() {
+		return adressDTO;
+	}
+
+
+
+	public void setAdressDTO(AdressDTO adressDTO) {
+		this.adressDTO = adressDTO;
+	}
+	
 
 }

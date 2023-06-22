@@ -14,8 +14,6 @@ public class CategorieDTO {
 	
 	private String photos;
 	
-	private Set<ArticleDTO> articlesDto;
-	
 	public CategorieDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -24,13 +22,12 @@ public class CategorieDTO {
 
 
 	public CategorieDTO(String nom, int remise, boolean isRemiseCumulable,
-			String photos, Set<ArticleDTO> articlesDto) {
+			String photos) {
 		super();
 		this.nom = nom;
 		this.remise = remise;
 		this.isRemiseCumulable = isRemiseCumulable;
 		this.photos = photos;
-		this.articlesDto = articlesDto;
 	}
 
 
@@ -93,18 +90,4 @@ public class CategorieDTO {
 		this.photos = photos;
 	}
 
-
-
-	public Set<ArticleDTO> getArticles() {
-		return articlesDto;
-	}
-
-
-
-	public void setArticles(Set<ArticleDTO> articles) {
-		this.articlesDto = articles;
-	}
-	
-	
-	
 }

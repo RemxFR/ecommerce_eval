@@ -1,5 +1,7 @@
 package fr.eval.DAO.EntityDAO;
 
+import java.util.List;
+
 import javax.persistence.RollbackException;
 
 import org.hibernate.Query;
@@ -112,6 +114,21 @@ public class UtilisateurDAO implements ICrud<Utilisateur> {
 
 	}
 
+
+	public List<Utilisateur> getAllUtilisateurs() throws Exception {
+		try {
+
+			this.session = ConnexionBdd.getSession();
+			Query<Utilisateur> query = this.session.createNamedQuery("Utilisateur::FindAll", Utilisateur.class);
+			return query.getResultList();
+
+		} finally {
+
+			this.closeSession(session);
+		}
+	}
+
+
 	@Override
 	public void closeSession(Session session) throws Exception {
 		if (session != null && session.isOpen()) {
@@ -119,5 +136,4 @@ public class UtilisateurDAO implements ICrud<Utilisateur> {
 		}
 
 	}
-
 }

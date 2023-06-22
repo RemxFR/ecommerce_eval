@@ -33,44 +33,37 @@ public class Commande {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotEmpty
-	@Column(name = "numero", length = 10, nullable = false, updatable = false)
+	@Column(name = "numero", length = 10)
 	private String numero;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dateCreation", nullable = false, updatable = false)
+	@Column(name = "dateCreation")
 	private Date dateCreation;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dateLivraison", nullable = false, updatable = false)
+	@Column(name = "dateLivraison")
 	private Date dateLivraison;
 	
-	@NotEmpty
-	@Column(name = "totalRemise", nullable = false)
+	@Column(name = "totalRemise")
 	private int totalRemise;
 	
-	@NotEmpty
-	@Column(name = "fraisExpidition", nullable = false)
+	@Column(name = "fraisExpidition")
 	private double fraisExpedition;
 	
-	@NotEmpty
-	@Column(name = "totalGeneral", nullable = false, updatable = false)
+	@Column(name = "totalGeneral")
 	private double totalGeneral;
 	
-	@NotEmpty
 	@OneToOne
 	private Adress adresseFacturation;
 	
-	@NotEmpty
 	@OneToOne
 	private Adress adresseLivraison;
 	
-	@NotEmpty
 	@OneToOne
 	private CartePaiement cpDefaut;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "utilisateur_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "utilisateur_id", referencedColumnName = "id")
 	private Utilisateur utilisateur;
 	
 	@OneToMany(cascade = CascadeType.ALL,

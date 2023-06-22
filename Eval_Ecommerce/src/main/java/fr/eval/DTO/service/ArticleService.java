@@ -19,11 +19,51 @@ public class ArticleService {
 
 
 
-	public Map<Article, List<Commentaire>> getCommentairesParArticle() throws Exception {
+	public Map<Article, List<Commentaire>> getCommentairesMapParArticle() throws Exception {
 		
-		Map<Article, List<Commentaire>> map = articleDAO.getCommentairesParArticle();
+		Map<Article, List<Commentaire>> map = articleDAO.getCommentairesMapParArticle();
 		
 		return map;
+	}
+
+
+
+	public List<Commentaire> getCommentairesListeParArticle(long id) throws Exception {
+		List<Commentaire> commentaires = articleDAO.getCommentairesParArticleListe(id);
+		return null;
+	}
+
+
+
+	public void addArticle(Article article) throws Exception {
+		
+		this.articleDAO.add(article);
+		
+	}
+
+
+
+	public void updateArticle(Article article) throws Exception {
+		
+		this.articleDAO.update(article);
+		
+	}
+
+
+
+	public Article getArticleById(long id) throws Exception {
+
+		Article article = this.articleDAO.getById(id);
+		
+		return article;
+	}
+
+
+
+	public void removeArticleById(long id) throws Exception {
+		
+		this.articleDAO.deleteById(id);
+		
 	}
 	
 }

@@ -1,5 +1,8 @@
 package fr.eval.DTO.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
@@ -12,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import fr.eval.DTO.entityDTO.ArticleDTO;
 import fr.eval.DTO.entityDTO.UtilisateurDTO;
 import fr.eval.DTO.service.UtilisateurService;
 import fr.eval.entity.Utilisateur;
@@ -49,28 +53,7 @@ public class UtilisateurREST implements IControllerRest<UtilisateurDTO>{
 		return Response.status(Status.OK.getStatusCode()).entity(ut).build();
 		
 	}
-	@PermitAll
-	@POST
-	@Path("authenticate")
-	@Consumes(MediaType.APPLICATION_JSON + CHARSET)
-	@Produces(MediaType.APPLICATION_JSON + CHARSET)
-	public Response AuthenticateClient(UtilisateurDTO dto) throws Exception {
-		//Utilisateur utilisateur = utilisateurService.authenticateUtilisateur(dto);
-		return Response.status(Status.OK.getStatusCode()).build();
-	}
-
-	@RolesAllowed("CLIENT")
-	@POST
-	@Path("add-user")
-	@Consumes(MediaType.APPLICATION_JSON + CHARSET)
-	@Produces(MediaType.APPLICATION_JSON + CHARSET)
-	@Override
-	public Response addT(UtilisateurDTO ut) throws Exception {
-		utilisateurService.addUtilisateur(ut);
-		return Response.status(Status.CREATED.getStatusCode(), "Enregistrement de l'utilisateur réussi")
-				.entity(ut).build();
-	}
-
+	
 	@RolesAllowed("CLIENT")
 	@Override
 	public Response updateT(UtilisateurDTO t) throws Exception {
@@ -85,6 +68,24 @@ public class UtilisateurREST implements IControllerRest<UtilisateurDTO>{
 		return null;
 	}
 	
-	
+	@GET
+	@RolesAllowed("ADMIN")
+	@Path("get-client-avec-panier-non-vide")
+	public Response getUtilisateurAvecPanierNonVide() throws Exception {
+		
+		Map<UtilisateurDTO, List<ArticleDTO>> map = utilisateurService.getUtilisateurAvecPanierNonVide();
+		
+		
+		return Response.status(Status.OK.getStatusCode())
+				.entity(map)
+				.build();
+		
+	}
+
+	@Override
+	public Response addT(UtilisateurDTO t) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

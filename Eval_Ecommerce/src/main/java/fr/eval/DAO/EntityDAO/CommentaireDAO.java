@@ -93,7 +93,7 @@ public class CommentaireDAO implements ICrud<Commentaire> {
 
 	}
 
-	public List<Commentaire> getCommentaireList() throws Exception {
+	public List<Commentaire> getCommentairesList() throws Exception {
 		Transaction transaction = null;
 		try {
 			this.session = ConnexionBdd.getSession();

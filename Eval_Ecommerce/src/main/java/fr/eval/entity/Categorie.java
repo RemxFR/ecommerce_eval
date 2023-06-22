@@ -27,19 +27,15 @@ public class Categorie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotEmpty
-	@Column(name = "nom", nullable = false, length = 45)
+	@Column(name = "nom", length = 45)
 	private String nom;
 	
-	@NotEmpty
-	@Column(name = "remise", nullable = false)
+	@Column(name = "remise")
 	private int remise;
 	
-	@NotEmpty
-	@Column(name = "isRemiseCumulable", nullable = false)
+	@Column(name = "isRemiseCumulable")
 	private boolean isRemiseCumulable;
 	
-	@NotEmpty
 	@Column(name = "photo")
 	private String photos;
 	

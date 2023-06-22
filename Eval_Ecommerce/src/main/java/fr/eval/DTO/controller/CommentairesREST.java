@@ -7,6 +7,7 @@ import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,12 +25,15 @@ public class CommentairesREST {
 	private CommentaireService cs = new CommentaireService();
 	private ArticleService as = new ArticleService();
 	
+	
+	
+	
 	@GET
 	@PermitAll
-	@Path("get-commentaires")
-	public Response getCommentairesList() throws Exception {
+	@Path("get-commentaires-{id}")
+	public Response getCommentairesList(@PathParam("id") long id) throws Exception {
 		
-		List<Commentaire> commentaires = cs.getCommentairesListe();
+		List<Commentaire> commentaires = as.getCommentairesListeParArticle(id);
 		return Response.status(Status.OK.getStatusCode())
 				.entity(commentaires)
 				.build();
@@ -40,11 +44,12 @@ public class CommentairesREST {
 	@Path("get-commentaires-par-article")
 	public Response getCommentairesByArticle() throws Exception {
 		
-		Map<Article, List<Commentaire>> map = as.getCommentairesParArticle();
+		Map<Article, List<Commentaire>> map = as.getCommentairesMapParArticle();
 		return Response.status(Status.OK.getStatusCode())
 				.entity(map)
 				.build();
-		
 	}
+	
+	
 	
 }

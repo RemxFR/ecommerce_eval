@@ -30,29 +30,22 @@ public class CartePaiement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotEmpty
 	@Column(name = "nomProprietaire", 
-	length = 25, nullable = false, 
-	updatable = false)
+	length = 25)
 	private String nomProprietaire;
 	
-	@NotEmpty
 	@Lob
 	@Column(name = "numero", 
-	columnDefinition = "TINYBLOB", 
-	nullable = false, updatable = false)
+	columnDefinition = "TINYBLOB")
 	private byte[] numero;
 	
-	@NotEmpty
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dateFinValidite", nullable = false, updatable = false)
+	@Column(name = "dateFinValidite")
 	private Date dateFinValidite;
 	
-	@NotEmpty
 	@Lob
 	@Column(name = "cryptogramme", 
-	columnDefinition = "TINYBLOB", 
-	nullable = false, updatable = false)
+	columnDefinition = "TINYBLOB")
 	private byte[] cryptogramme;
 	
 	@ManyToOne(cascade = CascadeType.ALL)

@@ -25,20 +25,17 @@ public class LigneDeCommande {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotEmpty
-	@Column(name = "quantite", nullable = false)
+	@Column(name = "quantite")
 	private int quantite;
 	
-	@NotEmpty
-	@Column(name = "prixUnitaire", nullable = false)
+	@Column(name = "prixUnitaire")
 	private double prixUnitaire;
 	
-	@NotEmpty
-	@Column(name = "remiseArticle", nullable = false)
+	@Column(name = "remiseArticle")
 	private int remiseArticle;
 	
 	@ManyToOne
-	@JoinColumn(name = "commande_id", nullable = false)
+	@JoinColumn(name = "commande_id")
 	private Commande commande;
 	
 	@OneToOne
@@ -50,7 +47,7 @@ public class LigneDeCommande {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LigneDeCommande(@NotEmpty int quantite, @NotEmpty double prixUnitaire, @NotEmpty int remiseArticle,
+	public LigneDeCommande(int quantite, double prixUnitaire, int remiseArticle,
 			Commande commande, Article article) {
 		super();
 		this.quantite = quantite;

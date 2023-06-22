@@ -6,7 +6,7 @@ public class ArticlePanierDTO {
 
 	private long id;
 	
-	private Article article;
+	private ArticleDTO articleDTO;
 	
 	private int quantite;
 	
@@ -17,9 +17,9 @@ public class ArticlePanierDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArticlePanierDTO(Article article, int quantite, UtilisateurDTO utilisateur) {
+	public ArticlePanierDTO(ArticleDTO articleDTO, int quantite, UtilisateurDTO utilisateur) {
 		super();
-		this.article = article;
+		this.articleDTO = articleDTO;
 		this.quantite = quantite;
 		this.utilisateur = utilisateur;
 	}
@@ -32,12 +32,12 @@ public class ArticlePanierDTO {
 		this.id = id;
 	}
 
-	public Article getArticle() {
-		return article;
+	public ArticleDTO getArticleDTO() {
+		return articleDTO;
 	}
 
-	public void setArticle(Article article) {
-		this.article = article;
+	public void setArticleDTO(ArticleDTO articleDTO) {
+		this.articleDTO = articleDTO;
 	}
 
 	public int getQuantite() {

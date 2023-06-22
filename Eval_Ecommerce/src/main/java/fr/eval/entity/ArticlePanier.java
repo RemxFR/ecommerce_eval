@@ -27,13 +27,11 @@ public class ArticlePanier {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotEmpty
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "article_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "article_id", referencedColumnName = "id")
 	private Article article;
 	
-	@NotEmpty
-	@Column(name = "quantite", nullable = false)
+	@Column(name = "quantite")
 	private int quantite;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -45,7 +43,7 @@ public class ArticlePanier {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArticlePanier(@NotEmpty Article article, @NotEmpty int quantite, Utilisateur utilisateur) {
+	public ArticlePanier(Article article, int quantite, Utilisateur utilisateur) {
 		super();
 		this.article = article;
 		this.quantite = quantite;

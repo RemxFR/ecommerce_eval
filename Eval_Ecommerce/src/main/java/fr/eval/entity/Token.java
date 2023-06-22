@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Token {
 
 	private long id;
-	private long idUtilisateur;
 	private UUID uuidToken;
+	private String profilUtilisateur;
 	
 }

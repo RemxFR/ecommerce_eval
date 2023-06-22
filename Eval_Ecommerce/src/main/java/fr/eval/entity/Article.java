@@ -35,31 +35,24 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotEmpty
-	@Column(name = "nom", length = 25, nullable = false)
+	@Column(name = "nom", length = 25)
 	private String nom;
 	
-	@NotEmpty
-	@Column(name = "prix", nullable = false)
+	@Column(name = "prix")
 	private double prix;
 	
-	@NotEmpty
 	@Column(name = "remise")
 	private int remise;
 	
-	@NotEmpty
-	@Column(name="stock", nullable = false)
+	@Column(name="stock")
 	private int stock;
 	
-	@NotEmpty
-	@Column(name = "isVandable", nullable = false)
+	@Column(name = "isVandable")
 	private boolean isVendable;
 	
-	@NotEmpty
 	@Column(name = "photos")
 	private String photos;
 	
-	@NotEmpty
 	@Column(name = "videos")
 	private String videos;
 	
@@ -70,7 +63,7 @@ public class Article {
 	private Set<Commentaire> commentaires;
 	
 	@ManyToOne
-	@JoinColumn(name = "categorie_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "categorie_id", referencedColumnName = "id")
 	private Categorie categorie;
 	
 	public Article() {

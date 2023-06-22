@@ -1,5 +1,6 @@
 package fr.eval.DAO.EntityDAO;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,7 +110,7 @@ public class ArticleDAO  implements ICrud<Article>{
 		
 	}
 
-	public Map<Article, List<Commentaire>> getCommentairesParArticle() throws Exception {
+	public Map<Article, List<Commentaire>> getCommentairesMapParArticle() throws Exception {
 		
 		Map<Article, List<Commentaire>> map = new HashMap<>();
 		
@@ -128,6 +129,23 @@ public class ArticleDAO  implements ICrud<Article>{
 
 			this.closeSession(session);
 		}
+	}
+
+	public List<Commentaire> getCommentairesParArticleListe(long id) throws Exception {
+		List<Commentaire> commentaires = null;
+		try {
+			Article article = getById(id);
+			if (article != null) {
+				commentaires = (List) article.getCommentaires();
+				if(commentaires == null) {
+					commentaires = new ArrayList<>();
+				}
+			}
+		} finally {
+			this.closeSession(this.session);
+		}
+		
+		return commentaires;
 	}
 	
 	

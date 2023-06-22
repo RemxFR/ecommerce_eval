@@ -3,6 +3,7 @@ package fr.eval.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,27 +16,25 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "t_commentaire")
-@NamedQueries ({
-	@NamedQuery(name = "Commentaire::FindAdressById", query = "FROM Commentaire c WHERE id= :id"),
-	@NamedQuery(name = "Commentaire::FindAll", query = "FROM Commentaire c")
-})
+@NamedQueries({ @NamedQuery(name = "Commentaire::FindCommentaireById", query = "FROM Commentaire c WHERE id= :id"),
+		@NamedQuery(name = "Commentaire::FindAll", query = "FROM Commentaire c") })
 public class Commentaire {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotEmpty
-	@Column(name = "texte", nullable = false)
+	@Column(name = "texte")
 	private String texte;
-	
-	@Column(name = "note", nullable = false)
+
+	@Column(name = "note")
 	private int note;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "article_id", referencedColumnName = "id", nullable = false)
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "article_id", referencedColumnName = "id")
 	private Article article;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "utilisateur_id", referencedColumnName = "id")
 	private Utilisateur utilisateur;
@@ -45,8 +44,7 @@ public class Commentaire {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Commentaire(@NotEmpty String texte, @NotEmpty int note, @NotEmpty Article article,
-			@NotEmpty Utilisateur utilisateur) {
+	public Commentaire(String texte, int note, Article article, Utilisateur utilisateur) {
 		super();
 		this.texte = texte;
 		this.note = note;
@@ -93,5 +91,5 @@ public class Commentaire {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	
+
 }

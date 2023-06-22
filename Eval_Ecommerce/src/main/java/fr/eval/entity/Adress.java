@@ -25,20 +25,16 @@ public class Adress {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotEmpty
 	@Column(name = "numero", nullable = false)
 	private int numero;
 	
-	@NotEmpty
-	@Column(name = "rue", length = 45, nullable = false)
+	@Column(name = "rue", length = 45)
 	private String rue;
 	
-	@NotEmpty
-	@Column(name = "ville", length = 45, nullable = false)
+	@Column(name = "ville", length = 45)
 	private String ville;
 	
-	@NotEmpty
-	@Column(name = "codePostal", length = 6, nullable = false)
+	@Column(name = "codePostal", length = 6)
 	private String codePostal;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "adresse")

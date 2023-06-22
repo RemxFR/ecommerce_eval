@@ -41,36 +41,31 @@ public class Utilisateur {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotEmpty
-	@Column(name = "nom", length = 25, nullable = false)
+	@Column(name = "nom", length = 25)
 	private String nom;
 	
-	@NotEmpty
-	@Column(name = "prenom", length = 25, nullable = false)
+	@Column(name = "prenom", length = 25)
 	private String prenom;
 	
 	
-	@Column(name = "dateNaissance", nullable = false)
+	@Column(name = "dateNaissance")
 	@Temporal(TemporalType.DATE)
 	private Date dateNaissance;
 	
 	@Column(name = "isActif", columnDefinition = "BOOLEAN")
 	private boolean isActif;
 	
-	@NotEmpty
 	@Column(name = "profil")
 	private String profil;
 	
-	@NotEmpty
-	@Column(name = "mail", length = 25, nullable = false)
+	@Column(name = "mail", length = 25)
 	private String email;
 	
-	@Column(name = "mdp", nullable = false, columnDefinition = "TINYBLOB")
+	@Column(name = "mdp", columnDefinition = "TINYBLOB")
 	@Lob
 	private byte[] password;
 	
-	@NotEmpty
-	@Column(name = "telephone", length = 10, nullable = false)
+	@Column(name = "telephone", length = 10)
 	private String telephone;
 	
 	@OneToOne(cascade = CascadeType.ALL)
