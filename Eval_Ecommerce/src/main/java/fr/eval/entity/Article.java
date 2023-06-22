@@ -38,6 +38,9 @@ public class Article {
 	@Column(name = "nom", length = 25)
 	private String nom;
 	
+	@Column(name = "description", length = 250)
+	private String description;
+	
 	@Column(name = "prix")
 	private double prix;
 	
@@ -68,12 +71,11 @@ public class Article {
 	
 	public Article() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 
 	public Article(String nom, double prix, int remise, int stock, boolean isVendable, String photos, String videos,
-			Set<Commentaire> commentaires) {
+			Set<Commentaire> commentaires, Categorie categorie, String description) {
 		super();
 		this.nom = nom;
 		this.prix = prix;
@@ -83,6 +85,8 @@ public class Article {
 		this.photos = photos;
 		this.videos = videos;
 		this.commentaires = commentaires;
+		this.categorie = categorie;
+		this.description = description;
 	}
 
 
@@ -174,8 +178,25 @@ public class Article {
 	public void setCommentaires(Set<Commentaire> commentaires) {
 		this.commentaires = commentaires;
 	}
-	
-	
-	
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
 	
 }

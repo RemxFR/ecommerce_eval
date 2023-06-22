@@ -68,24 +68,27 @@ public class UtilisateurREST implements IControllerRest<UtilisateurDTO>{
 		return null;
 	}
 	
-	@GET
-	@RolesAllowed("ADMIN")
-	@Path("get-client-avec-panier-non-vide")
-	public Response getUtilisateurAvecPanierNonVide() throws Exception {
-		
-		Map<UtilisateurDTO, List<ArticleDTO>> map = utilisateurService.getUtilisateurAvecPanierNonVide();
-		
-		
-		return Response.status(Status.OK.getStatusCode())
-				.entity(map)
-				.build();
-		
-	}
-
+	@PermitAll
 	@Override
 	public Response addT(UtilisateurDTO t) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+//	@GET
+//	@RolesAllowed("ADMIN")
+//	@Path("get-client-avec-panier-non-vide")
+//	public Response getUtilisateurAvecPanierNonVide() throws Exception {
+//		
+//		Map<UtilisateurDTO, List<ArticleDTO>> map = utilisateurService.getUtilisateurAvecPanierNonVide();
+//		
+//		
+//		return Response.status(Status.OK.getStatusCode())
+//				.entity(map)
+//				.build();
+//		
+//	}
+
+
 	
 }

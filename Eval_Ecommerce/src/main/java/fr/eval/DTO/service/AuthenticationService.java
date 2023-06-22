@@ -28,6 +28,7 @@ public class AuthenticationService {
 
 		if (utilisateur == null) {
 			System.out.println("Email incorrect");
+			return null;
 		} else {
 			mdp = ChiffrageUtilisateurEtCp.dechiffrageMDP(utilisateur.getPassword());
 

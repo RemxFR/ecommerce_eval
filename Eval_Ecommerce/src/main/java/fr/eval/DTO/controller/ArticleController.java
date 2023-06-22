@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import fr.eval.DTO.entityDTO.ArticleDTO;
 import fr.eval.DTO.service.ArticleService;
 import fr.eval.entity.Article;
 
@@ -33,12 +34,12 @@ public class ArticleController {
 	
 	@PATCH
 	@RolesAllowed({"MAGASINIER", "ADMIN"})
-	@Path("add")
-	public Response updateArticle(Article article) throws Exception {
+	@Path("update-{id}")
+	public Response updateArticle(Article article, @PathParam("id") long id) {
 		
-		articleService.updateArticle(article);
+		articleService.updateArticle(article, id);
 		
-		return Response.status(Status.CREATED.getStatusCode())
+		return Response.status(Status.OK.getStatusCode())
 				.entity("Update de l'article réussie !")
 				.build();
 		

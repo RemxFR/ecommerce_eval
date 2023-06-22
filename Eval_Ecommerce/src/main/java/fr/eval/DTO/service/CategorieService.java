@@ -15,7 +15,7 @@ public class CategorieService {
 
 	}
 
-	public void updateCategorie(Categorie categorie) throws Exception {
+	public void updateCategorie(Categorie categorie, long id) throws Exception {
 
 		this.categorieDAO.update(categorie);
 

@@ -14,6 +14,7 @@ import fr.eval.DAO.EntityDAO.UtilisateurDAO;
 import fr.eval.DTO.entityDTO.ArticleDTO;
 import fr.eval.DTO.entityDTO.ArticlePanierDTO;
 import fr.eval.DTO.entityDTO.UtilisateurDTO;
+import fr.eval.DTO.service.conversions.UtilisateurConverter;
 import fr.eval.entity.Adress;
 import fr.eval.entity.Article;
 import fr.eval.entity.ArticlePanier;
@@ -57,6 +58,7 @@ public class UtilisateurService {
 		utilisateur.setTelephone(utilisateurDTO.getTelephone());
 
 		this.utilisateurDao.add(utilisateur);
+		
 		if (utilisateur.getAdresse() != null) {
 			Adress adress = new Adress();
 			adress.setNumero(utilisateurDTO.getAdressDTO().getNumero());
@@ -74,95 +76,81 @@ public class UtilisateurService {
 		Utilisateur utilisateur = this.utilisateurDao.getByMail(mail);
 		UtilisateurDTO dto = new UtilisateurDTO();
 
-		dto = this.convertUtilisateurEnDto(utilisateur);
+		dto = UtilisateurConverter.convertUtilisateurEnDto(utilisateur);
 
 		return dto;
 	}
 
-	public Map<UtilisateurDTO, List<ArticleDTO>> getUtilisateurAvecPanierNonVide() throws Exception {
-
-		Map<UtilisateurDTO, List<ArticleDTO>> map = new HashMap<>();
-
-		List<UtilisateurDTO> utilisateursDtos = new ArrayList<>();
-		List<ArticleDTO> articles = new ArrayList<>();
-		List<ArticlePanierDTO> articlesPanierDTO = new ArrayList<>();
-		List<Utilisateur> utilisateurs = utilisateurDao.getAllUtilisateurs();
-
-		// Transforme les utilisateurs en utilisateurDTOs
-		if (utilisateurs != null || !utilisateurs.isEmpty()) {
-			for (Utilisateur utilisateur : utilisateurs) {
-
-				UtilisateurDTO dto = this.convertUtilisateurEnDto(utilisateur);
-
-				utilisateursDtos.add(dto);
-			}
-		} else {
-			System.out.println("Aucun utilisateur trouvé.");
-			return null;
-		}
-
-		// Transforme les articlePaniers en articlePaniersDtos
-		for (Utilisateur utilisateur : utilisateurs) {
-			articlesPanierDTO = this.convertArticlePanierEnDto(utilisateur.getPanier());
-		}
-
-		// Transforme chaque article du panierDto en articleDto
-		for (int i = 0; i < utilisateursDtos.size(); i++) {
-			if (articlesPanierDTO.get(i).getUtilisateur().getId() == utilisateursDtos.get(i).getId()) {
-				List<ArticleDTO> articleDTOs = new ArrayList<>();
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	public Map<UtilisateurDTO, List<ArticleDTO>> getUtilisateurAvecPanierNonVide() throws Exception {
+//
+//		Map<UtilisateurDTO, List<ArticleDTO>> map = new HashMap<>();
+//
+//		List<UtilisateurDTO> utilisateursDtos = new ArrayList<>();
+//		List<ArticleDTO> articles = new ArrayList<>();
+//		List<ArticlePanierDTO> articlesPanierDTO = new ArrayList<>();
+//		List<Utilisateur> utilisateurs = utilisateurDao.getAllUtilisateurs();
+//
+//		// Transforme les utilisateurs en utilisateurDTOs
+//		if (utilisateurs != null || !utilisateurs.isEmpty()) {
+//			for (Utilisateur utilisateur : utilisateurs) {
+//
+//				UtilisateurDTO dto = this.convertUtilisateurEnDto(utilisateur);
+//
+//				utilisateursDtos.add(dto);
+//			}
+//		} else {
+//			System.out.println("Aucun utilisateur trouvé.");
+//			return null;
+//		}
+//
+//		// Transforme les articlePaniers en articlePaniersDtos
+//		for (Utilisateur utilisateur : utilisateurs) {
+//			articlesPanierDTO = this.convertArticlePanierEnDto(utilisateur.getPanier());
+//		}
+//
+//		// Transforme chaque article du panierDto en articleDto
+//		for (int i = 0; i < utilisateursDtos.size(); i++) {
+//			if (articlesPanierDTO.get(i).getUtilisateur().getId() == utilisateursDtos.get(i).getId()) {
+//				List<ArticleDTO> articleDTOs = new ArrayList<>();
+//
 //				for (ArticlePanierDTO articlePanierDTO : utilisateursDtos.get(i).
 //				}
 //				map.put(utilisateursDtos.get(i), articlesPanierDTO.get(i).getArticleDTO())
-			}
-		}
-
-		// Ajoute pour chaque utilisateurDto sa liste d'articleDtos associés
-
-		return map;
-	}
-
-	private UtilisateurDTO convertUtilisateurEnDto(Utilisateur utilisateur) throws Exception {
-		UtilisateurDTO dto = new UtilisateurDTO();
-		dto.setId(utilisateur.getId());
-		dto.setNom(utilisateur.getNom());
-		dto.setPrenom(utilisateur.getPrenom());
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE);
-		String dateNaissance = dateFormat.format(utilisateur.getDateNaissance());
-
-		dto.setDateNaissance(dateNaissance);
-		dto.setProfil(Profil.CLIENT.name());
-		dto.setEmail(utilisateur.getEmail());
-		dto.setPassword(ChiffrageUtilisateurEtCp.dechiffrageMDP(utilisateur.getPassword()));
-		dto.setTelephone(utilisateur.getTelephone());
-
-		return dto;
-	}
-
-	private List<ArticlePanierDTO> convertArticlePanierEnDto(Set<ArticlePanier> articlesSet) throws Exception {
-
-		List<ArticlePanierDTO> articlePanierDTOs = new ArrayList<>();
-
-		for (ArticlePanier articlePanier : articlesSet) {
-			ArticlePanierDTO articlePanierDTO = new ArticlePanierDTO();
-			articlePanierDTO.setId(articlePanier.getId());
-			articlePanierDTO.setArticleDTO(this.convertArticleEnDTO(articlePanier.getArticle()));
-			articlePanierDTO.setQuantite(articlePanier.getQuantite());
-			articlePanierDTO.setUtilisateur(this.convertUtilisateurEnDto(articlePanier.getUtilisateur()));
-
-			articlePanierDTOs.add(articlePanierDTO);
-		}
-		return articlePanierDTOs;
-	}
-
-	private ArticleDTO convertArticleEnDTO(Article article) {
-
-		ArticleDTO articleDTO = new ArticleDTO();
-		articleDTO.setId(article.getId());
-		articleDTO.setNom(article.getNom());
-		articleDTO.setPhotos(article.getPhotos());
-		return articleDTO;
-	}
+//			}
+//		}
+//
+//		// Ajoute pour chaque utilisateurDto sa liste d'articleDtos associés
+//
+//		return map;
+//	}
+//
+//	private List<ArticlePanierDTO> convertArticlePanierEnDto(Set<ArticlePanier> articlesSet) throws Exception {
+//
+//		List<ArticlePanierDTO> articlePanierDTOs = new ArrayList<>();
+//
+//		for (ArticlePanier articlePanier : articlesSet) {
+//			ArticlePanierDTO articlePanierDTO = new ArticlePanierDTO();
+//			articlePanierDTO.setId(articlePanier.getId());
+//			articlePanierDTO.setArticleDTO(this.convertArticleEnDTO(articlePanier.getArticle()));
+//			articlePanierDTO.setQuantite(articlePanier.getQuantite());
+//			articlePanierDTO.setUtilisateur(UtilisateurConverter.convertUtilisateurEnDto(articlePanier.getUtilisateur()));
+//
+//			articlePanierDTOs.add(articlePanierDTO);
+//		}
+//		return articlePanierDTOs;
+//	}
 
 }
