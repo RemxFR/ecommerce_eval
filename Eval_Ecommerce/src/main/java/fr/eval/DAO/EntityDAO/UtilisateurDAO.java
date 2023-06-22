@@ -18,7 +18,6 @@ public class UtilisateurDAO implements ICrud<Utilisateur> {
 
 	@Override
 	public void add(Utilisateur ut) throws Exception {
-		System.out.println("-----Entrée dans add DAO -----");
 		Transaction transaction = null;
 		try {
 

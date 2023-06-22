@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 import fr.eval.DAO.EntityDAO.AdressDAO;
@@ -29,17 +28,15 @@ public class UtilisateurService {
 		super();
 	}
 
-	public void addUtilisateur(UtilisateurDTO utilisateurDTO, String profil) throws Exception {
-		System.out.println("----- Entrée dans addUtilisateur service -----");
+	public Utilisateur addUtilisateur(UtilisateurDTO utilisateurDTO, String profil) throws Exception {
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setNom(utilisateurDTO.getNom());
 		utilisateur.setPrenom(utilisateurDTO.getPrenom());
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		Date dateNaissance = dateFormat.parse(utilisateurDTO.getDateNaissance());
 
 		utilisateur.setDateNaissance(dateNaissance);
-
 		switch (profil) {
 		case "CLIENT":
 			utilisateur.setProfil(Profil.CLIENT.name());
@@ -79,7 +76,7 @@ public class UtilisateurService {
 			adress.setUtilisateur(utilisateur);
 			this.adressDAO.add(adress);
 		}
-
+		return utilisateur;
 	}
 
 	public UtilisateurDTO getByMail(String mail) throws Exception {

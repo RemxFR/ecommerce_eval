@@ -22,16 +22,16 @@ import fr.eval.entity.ArticlePanier;
 public class PanierController {
 
 	private PanierService panierService = new PanierService();
-	
+
 	@POST
 	@RolesAllowed("CLIENT")
 	@Path("add-{id}")
 	public Response addArticlePanier(ArticlePanier articlePanier, @PathParam("id") long id) {
-		
+
 		this.panierService.addArticlePanier(articlePanier, id);
 		return Response.status(Status.OK.getStatusCode()).build();
 	}
-	
+
 	@PUT
 	@RolesAllowed("CLIENT")
 	@Path("update-{id}")
@@ -39,7 +39,7 @@ public class PanierController {
 		this.panierService.updateArticlePanier(articlePanier, id);
 		return Response.status(Status.OK.getStatusCode()).build();
 	}
-	
+
 	@DELETE
 	@RolesAllowed("CLIENT")
 	@Path("delete-{id}")
@@ -47,7 +47,7 @@ public class PanierController {
 		this.panierService.deleteArticlePanier(id);
 		return Response.status(Status.OK.getStatusCode()).build();
 	}
-	
+
 	@GET
 	@RolesAllowed("CLIENT")
 	@Path("get-panier-{id}")
