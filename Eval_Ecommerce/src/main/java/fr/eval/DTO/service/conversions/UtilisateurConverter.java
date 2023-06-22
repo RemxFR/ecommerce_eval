@@ -1,6 +1,7 @@
 package fr.eval.DTO.service.conversions;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import fr.eval.DTO.entityDTO.UtilisateurDTO;
@@ -9,7 +10,6 @@ import fr.eval.entity.Profil;
 import fr.eval.entity.Utilisateur;
 
 public final class UtilisateurConverter {
-	
 
 	private UtilisateurConverter() {
 		super();
@@ -33,5 +33,20 @@ public final class UtilisateurConverter {
 
 		return dto;
 	}
-	
+
+	public static Utilisateur updateUtilisateurFromDto(Utilisateur utilisateur, UtilisateurDTO dto) throws Exception {
+
+		utilisateur.setNom(dto.getNom());
+		utilisateur.setPrenom(dto.getPrenom());
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE);
+		Date dateNaissance = dateFormat.parse(dto.getDateNaissance());
+
+		utilisateur.setDateNaissance(dateNaissance);
+		utilisateur.setEmail(dto.getEmail());
+		utilisateur.setTelephone(dto.getTelephone());
+
+		return utilisateur;
+	}
+
 }

@@ -1,5 +1,8 @@
 package fr.eval.DAO.EntityDAO;
 
+import java.util.List;
+import java.util.Set;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -40,7 +43,7 @@ public class ArticlePanierDAO implements ICrud<ArticlePanier> {
 		try {
 
 			this.session = ConnexionBdd.getSession();
-			Query<ArticlePanier> query = this.session.createNamedQuery("ArticlePanier::FindAdressById", ArticlePanier.class);
+			Query<ArticlePanier> query = this.session.createNamedQuery("ArticlePanier::FindArticleById", ArticlePanier.class);
 			query.setParameter("id", id);
 			return query.uniqueResult();
 
@@ -90,6 +93,26 @@ public class ArticlePanierDAO implements ICrud<ArticlePanier> {
 		}
 		
 	}
+	
+	public List<ArticlePanier> getPanierByIdClient(long id) throws Exception {
+		
+		try {
+			
+			this.session = ConnexionBdd.getSession();
+			
+			Query<ArticlePanier> query = this.session.createNamedQuery("ArticlePanier::FindPanierByClientId", ArticlePanier.class);
+			query.setParameter("id", id);
+			
+			return query.getResultList();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeSession(this.session);
+		}
+		
+		return null;
+	}
 
 	@Override
 	public void closeSession(Session session) throws Exception {
@@ -98,6 +121,8 @@ public class ArticlePanierDAO implements ICrud<ArticlePanier> {
 		}
 		
 	}
+
+
 
 	
 	

@@ -18,8 +18,9 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "t_article_panier")
 @NamedQueries ({
-	@NamedQuery(name = "ArticlePanier::FindAdressById", query = "FROM ArticlePanier ap WHERE id= :id"),
-	@NamedQuery(name = "ArticlePanier::FindAll", query = "FROM ArticlePanier ap")
+	@NamedQuery(name = "ArticlePanier::FindArticleById", query = "FROM ArticlePanier ap WHERE id= :id"),
+	@NamedQuery(name = "ArticlePanier::FindAll", query = "FROM ArticlePanier ap"),
+	@NamedQuery(name = "ArticlePanier::FindPanierByClientId", query = "FROM ArticlePanier ap WHERE utilisateur_id = :id")
 })
 public class ArticlePanier {
 

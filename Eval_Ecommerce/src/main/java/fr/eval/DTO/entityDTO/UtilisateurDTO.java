@@ -1,10 +1,6 @@
 package fr.eval.DTO.entityDTO;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
-
-import fr.eval.entity.Profil;
 
 public class UtilisateurDTO {
 
@@ -23,16 +19,14 @@ public class UtilisateurDTO {
 	private String password;
 
 	private String telephone;
-	
+
 	private List<ArticleDTO> panier;
-	
+
 	private AdressDTO adressDTO;
 
 	public UtilisateurDTO() {
 		super();
 	}
-
-	
 
 	public UtilisateurDTO(String nom, String prenom, String dateNaissance, String profil, String email, String password,
 			String telephone, List<ArticleDTO> panier, AdressDTO adressDTO) {
@@ -47,8 +41,6 @@ public class UtilisateurDTO {
 		this.panier = panier;
 		this.adressDTO = adressDTO;
 	}
-
-
 
 	public long getId() {
 		return id;
@@ -114,29 +106,20 @@ public class UtilisateurDTO {
 		this.telephone = telephone;
 	}
 
-
-
 	public List<ArticleDTO> getPanier() {
 		return panier;
 	}
-
-
 
 	public void setPanier(List<ArticleDTO> panier) {
 		this.panier = panier;
 	}
 
-
-
 	public AdressDTO getAdressDTO() {
 		return adressDTO;
 	}
 
-
-
 	public void setAdressDTO(AdressDTO adressDTO) {
 		this.adressDTO = adressDTO;
 	}
-	
 
 }

@@ -3,21 +3,20 @@ package fr.eval.DTO.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 
 import fr.eval.DAO.EntityDAO.AdressDAO;
 import fr.eval.DAO.EntityDAO.UtilisateurDAO;
-import fr.eval.DTO.entityDTO.ArticleDTO;
-import fr.eval.DTO.entityDTO.ArticlePanierDTO;
 import fr.eval.DTO.entityDTO.UtilisateurDTO;
 import fr.eval.DTO.service.conversions.UtilisateurConverter;
 import fr.eval.entity.Adress;
-import fr.eval.entity.Article;
 import fr.eval.entity.ArticlePanier;
+import fr.eval.entity.CartePaiement;
+import fr.eval.entity.Commande;
+import fr.eval.entity.Commentaire;
 import fr.eval.entity.Profil;
 import fr.eval.entity.Utilisateur;
 
@@ -57,8 +56,20 @@ public class UtilisateurService {
 		utilisateur.setPassword(ChiffrageUtilisateurEtCp.chiffrageMDP(utilisateurDTO.getPassword()));
 		utilisateur.setTelephone(utilisateurDTO.getTelephone());
 
+		Set<Commande> commandes = new HashSet<>();
+		utilisateur.setCommandes(commandes);
+
+		Set<CartePaiement> cartePaiements = new HashSet<>();
+		utilisateur.setCartePaiements(cartePaiements);
+
+		List<Commentaire> commentaires = new ArrayList<>();
+		utilisateur.setCommentaires(commentaires);
+
+		Set<ArticlePanier> articlePaniers = new HashSet<>();
+		utilisateur.setPanier(articlePaniers);
+
 		this.utilisateurDao.add(utilisateur);
-		
+
 		if (utilisateur.getAdresse() != null) {
 			Adress adress = new Adress();
 			adress.setNumero(utilisateurDTO.getAdressDTO().getNumero());
@@ -81,19 +92,78 @@ public class UtilisateurService {
 		return dto;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public Utilisateur getUtilisateurById(long id) {
+
+		Utilisateur utilisateur = null;
+
+		try {
+
+			if (id > 0 && (Long) id != null) {
+				utilisateur = this.getUtilisateurById(id);
+				if (utilisateur == null) {
+					System.out.println("Utilisateur inexistant...");
+				}
+			} else {
+				System.out.println("L'id doit être un chiffre strictement supérier à 0...");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return utilisateur;
+	}
+
+	public void updateUtilisateur(UtilisateurDTO utilisateurDTO, long id) {
+
+		Utilisateur utilisateurToUpdate = null;
+
+		try {
+
+			if (utilisateurDTO != null) {
+
+				utilisateurToUpdate = this.getUtilisateurById(id);
+
+				if (utilisateurToUpdate != null) {
+
+					utilisateurToUpdate = UtilisateurConverter.updateUtilisateurFromDto(utilisateurToUpdate,
+							utilisateurDTO);
+
+				} else {
+					System.out.println("Utilisateur inexistant...");
+				}
+				System.out.println("L'utilisateur DTO utilisé pour l'update ne peut pas être nul... ");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void removeUtilisateur(long id) {
+
+		Utilisateur utilisateurToDelete = null;
+
+		try {
+
+			if (id > 0 && (Long) id != null) {
+
+				utilisateurToDelete = this.getUtilisateurById(id);
+				if (utilisateurToDelete != null) {
+					this.utilisateurDao.deleteById(id);
+				} else {
+					System.out.println("Utilisateur inexistant...");
+				}
+			} else {
+				System.out.println("L'id doit être un chiffre strictement supérier à 0...");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 //	public Map<UtilisateurDTO, List<ArticleDTO>> getUtilisateurAvecPanierNonVide() throws Exception {
 //
 //		Map<UtilisateurDTO, List<ArticleDTO>> map = new HashMap<>();
