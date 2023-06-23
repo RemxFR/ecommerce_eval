@@ -18,12 +18,18 @@ public class CORSFilter implements Filter {
 
 		HttpServletRequest servletRequest = (HttpServletRequest) request;
 
-		((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-		((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, X-Auth-Token");
-		((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Credentials", "true");
-		((HttpServletResponse) servletResponse).addHeader("Access-Control-Request-Headers", "Origin, X-Custom-Header, X-Requested-With, Authorization, Content-Type, Accept");
-		((HttpServletResponse) servletResponse).addHeader("Access-Control-Expose-Headers", "Content-Length, X-Kuma-Revision");
-		((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+		HttpServletResponse response = (HttpServletResponse) servletResponse;
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, X-Auth-Token");
+		response.addHeader("Access-Control-Allow-Credentials", "true");
+		response.addHeader("Access-Control-Request-Headers", "Origin, X-Custom-Header, X-Requested-With, Authorization, Content-Type, Accept");
+		response.addHeader("Access-Control-Expose-Headers", "Content-Length, X-Kuma-Revision");
+		response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+		
+		if (((HttpServletRequest) request).getMethod().equals("OPTIONS")) {
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+            return;
+        }
 		
 		chain.doFilter(servletRequest, servletResponse);
 	}

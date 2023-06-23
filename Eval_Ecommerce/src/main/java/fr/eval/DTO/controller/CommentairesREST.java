@@ -5,10 +5,12 @@ import java.util.Map;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -25,6 +27,7 @@ import fr.eval.entity.Commentaire;
 @Produces(value = MediaType.TEXT_PLAIN)
 public class CommentairesREST {
 
+	private static final String CHARSET = ";charset=UTF-8";
 	private CommentaireService cs = new CommentaireService();
 	private ArticleService as = new ArticleService();
 	
@@ -34,6 +37,7 @@ public class CommentairesREST {
 	@GET
 	@PermitAll
 	@Path("get-commentaires-{id}")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response getCommentairesList(@PathParam("id") long id) throws Exception {
 		
 		List<Commentaire> commentaires = as.getCommentairesListeParArticle(id);
@@ -45,6 +49,7 @@ public class CommentairesREST {
 	@GET
 	@RolesAllowed("ADMIN")
 	@Path("get-commentaires-par-article")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response getCommentairesByArticle() throws Exception {
 		
 		Map<Article, List<Commentaire>> map = as.getCommentairesMapParArticle();
@@ -57,6 +62,8 @@ public class CommentairesREST {
 	@POST
 	@RolesAllowed({"MAGASINIER", "ADMIN", "CLIENT"})
 	@Path("add")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
+	@Consumes(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response addCommentaire(Commentaire commentaire) {
 		
 		this.cs.addCommentaire(commentaire);
@@ -67,9 +74,11 @@ public class CommentairesREST {
 		
 	}
 	
-	@PATCH
+	@PUT
 	@RolesAllowed({"MAGASINIER", "ADMIN", "CLIENT"})
 	@Path("update-{id}")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
+	@Consumes(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response updateCommentaire(Commentaire commentaire, @PathParam("id") long id) {
 		
 		this.cs.updateCommentaire(commentaire, id);
@@ -83,6 +92,7 @@ public class CommentairesREST {
 	@GET
 	@RolesAllowed({"MAGASINIER", "ADMIN", "CLIENT"})
 	@Path("get-{id}")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response getCommentaireById(@PathParam("id") long id) {
 		
 		Commentaire commentaire = this.cs.getCommentaireById(id);

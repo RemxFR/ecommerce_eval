@@ -42,7 +42,6 @@ public class ChiffrageUtilisateurEtCp {
 
 	public static byte[] chiffrageNumCP(CartePaiementDTO cpDTO) throws Exception {
 
-		CartePaiement cartePaiement = null;
 		paramsDAO = new ParamsDAO();
 		key = paramsDAO.getCleDeChiffrageMdp();
 

@@ -21,12 +21,14 @@ import fr.eval.entity.Adress;
 @Path("adress")
 @Produces(value = MediaType.TEXT_PLAIN)
 public class AdressController {
+	
 	private static final String CHARSET = ";charset=UTF-8";
 	private AdresseService adresseService = new AdresseService();
 
 	@GET
 	@PermitAll
 	@Path(value = "infos")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
 	public String getInfos() {
 		return "Info adresse est ok !";
 	}
@@ -34,6 +36,7 @@ public class AdressController {
 	@GET
 	@RolesAllowed({ "ADMIN", "MAGASINIER" })
 	@Path(value = "get-{id}")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response getById(@PathParam("id") long id) {
 
 		Adress adress = this.adresseService.getAdresse(id);

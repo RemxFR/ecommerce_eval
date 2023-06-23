@@ -1,6 +1,7 @@
 package fr.eval.DTO.controller;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,12 +19,15 @@ import fr.eval.entity.Categorie;
 @Path("categorie")
 @Produces(MediaType.TEXT_PLAIN)
 public class CategorieController {
-
+	
+	private static final String CHARSET = ";charset=UTF-8";
 	private CategorieService categorieService = new CategorieService();
 
 	@POST
 	@RolesAllowed({ "MAGASINIER", "ADMIN" })
 	@Path("add")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
+	@Consumes(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response addCategorie(Categorie categorie) throws Exception {
 
 		categorieService.addCategorie(categorie);
@@ -36,6 +40,8 @@ public class CategorieController {
 	@PUT
 	@RolesAllowed({ "MAGASINIER", "ADMIN" })
 	@Path("update-{id}")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
+	@Consumes(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response updateCategorie(Categorie categorie, @PathParam("id") long id) throws Exception {
 
 		categorieService.updateCategorie(categorie, id);
@@ -47,6 +53,7 @@ public class CategorieController {
 	@GET
 	@RolesAllowed({ "MAGASINIER", "ADMIN" })
 	@Path("get-{id}")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response getCategorieById(@PathParam("id") long id) throws Exception {
 
 		Categorie article = categorieService.getCategorieById(id);

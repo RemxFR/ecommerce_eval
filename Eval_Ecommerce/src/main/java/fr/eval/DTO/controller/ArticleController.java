@@ -1,12 +1,16 @@
 package fr.eval.DTO.controller;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -15,13 +19,17 @@ import fr.eval.DTO.service.ArticleService;
 import fr.eval.entity.Article;
 
 @Path("article")
+@Produces(value = MediaType.TEXT_PLAIN)
 public class ArticleController {
 
+	private static final String CHARSET = ";charset=UTF-8";
 	private ArticleService articleService = new ArticleService();
 	
 	@POST
 	@RolesAllowed({"MAGASINIER", "ADMIN"})
 	@Path("add")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
+	@Consumes(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response addArticle(Article article) throws Exception {
 		
 		articleService.addArticle(article);
@@ -32,9 +40,11 @@ public class ArticleController {
 		
 	}
 	
-	@PATCH
+	@PUT
 	@RolesAllowed({"MAGASINIER", "ADMIN"})
 	@Path("update-{id}")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
+	@Consumes(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response updateArticle(Article article, @PathParam("id") long id) {
 		
 		articleService.updateArticle(article, id);
@@ -48,6 +58,7 @@ public class ArticleController {
 	@GET
 	@RolesAllowed({"MAGASINIER", "ADMIN"})
 	@Path("get-{id}")
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
 	public Response getArticleById(@PathParam("id") long id) throws Exception {
 		
 		Article article = articleService.getArticleById(id);

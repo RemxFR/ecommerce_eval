@@ -31,6 +31,7 @@ public class UtilisateurREST implements IControllerRest<UtilisateurDTO>{
 	@PermitAll
 	@Path("infos")
 	@GET
+	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
 	@Override
 	public String getInfos() throws Exception {
 		String getInfos = "Test utilisateur get infos";
