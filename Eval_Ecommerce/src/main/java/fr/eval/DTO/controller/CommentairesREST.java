@@ -61,12 +61,12 @@ public class CommentairesREST {
 	
 	@POST
 	@RolesAllowed({"MAGASINIER", "ADMIN", "CLIENT"})
-	@Path("add-{id}")
+	@Path("add-{idArticle}-{idUtilisateur}")
 	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
 	@Consumes(value = MediaType.APPLICATION_JSON + CHARSET)
-	public Response addCommentaire(Commentaire commentaire, @PathParam("id") long id) {
+	public Response addCommentaire(Commentaire commentaire, @PathParam("idArticle") long idArticle, @PathParam("idUtilisateur") long idUtilisateur) {
 		
-		this.cs.addCommentaire(commentaire, id);
+		this.cs.addCommentaire(commentaire, idArticle, idUtilisateur);
 		
 		return Response.status(Status.CREATED.getStatusCode(), "Création de l'article réussie !")
 				.entity(commentaire)
