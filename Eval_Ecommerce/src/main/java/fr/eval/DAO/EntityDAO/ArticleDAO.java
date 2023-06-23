@@ -28,7 +28,6 @@ public class ArticleDAO  implements ICrud<Article>{
 			
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
 			this.session.save(t);
 			this.transaction.commit();
 			
@@ -64,7 +63,6 @@ public class ArticleDAO  implements ICrud<Article>{
 		try {
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
 			this.session.update(t);
 			this.transaction.commit();
 			
@@ -87,7 +85,6 @@ public class ArticleDAO  implements ICrud<Article>{
 			Article articleToDelete = this.getById(id);
 
 			if(articleToDelete != null) {
-			this.transaction.begin();
 			this.session.delete(articleToDelete);
 			this.transaction.commit();
 			} else {

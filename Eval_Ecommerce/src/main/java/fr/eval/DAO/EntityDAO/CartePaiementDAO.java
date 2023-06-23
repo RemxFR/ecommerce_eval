@@ -19,7 +19,6 @@ public class CartePaiementDAO implements ICrud<CartePaiement> {
 
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
 			this.session.save(t);
 			this.transaction.commit();
 
@@ -55,7 +54,6 @@ public class CartePaiementDAO implements ICrud<CartePaiement> {
 		try {
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
 			this.session.update(t);
 			this.transaction.commit();
 
@@ -76,7 +74,6 @@ public class CartePaiementDAO implements ICrud<CartePaiement> {
 			CartePaiement cpToDelete = this.getById(id);
 
 			if(cpToDelete != null) {
-			this.transaction.begin();
 			this.session.delete(cpToDelete);
 			this.transaction.commit();
 			} else {

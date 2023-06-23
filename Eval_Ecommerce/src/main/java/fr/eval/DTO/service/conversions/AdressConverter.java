@@ -11,6 +11,8 @@ public final class AdressConverter {
 
 	public static Adress convertAdressDtoEnAdress(AdressDTO adressDTO) {
 
+		System.out.println("Conversion de l'adresse DTO en adresse...");
+		
 		Adress adressConvertie = new Adress();
 
 		adressConvertie.setNumero(adressDTO.getNumero());

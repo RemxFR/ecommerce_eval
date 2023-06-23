@@ -6,11 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -37,7 +40,9 @@ public class Adress {
 	@Column(name = "codePostal", length = 6)
 	private String codePostal;
 	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "adresse")
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "utilisateur_id", referencedColumnName = "id")
 	private Utilisateur utilisateur;
 
 	public Adress() {

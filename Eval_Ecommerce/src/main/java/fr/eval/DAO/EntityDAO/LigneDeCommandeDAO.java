@@ -19,7 +19,6 @@ public class LigneDeCommandeDAO implements ICrud<LigneDeCommande> {
 
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
 			this.session.save(t);
 			this.transaction.commit();
 
@@ -55,7 +54,6 @@ public class LigneDeCommandeDAO implements ICrud<LigneDeCommande> {
 		try {
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
 			this.session.update(t);
 			this.transaction.commit();
 
@@ -76,7 +74,6 @@ public class LigneDeCommandeDAO implements ICrud<LigneDeCommande> {
 			LigneDeCommande ldcToDelete = this.getById(id);
 
 			if (ldcToDelete != null) {
-				this.transaction.begin();
 				this.session.delete(ldcToDelete);
 				this.transaction.commit();
 			} else {

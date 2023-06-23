@@ -19,7 +19,6 @@ public class CategorieDAO implements ICrud<Categorie> {
 
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
 			this.session.save(t);
 			this.transaction.commit();
 
@@ -54,7 +53,6 @@ public class CategorieDAO implements ICrud<Categorie> {
 		try {
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
 			this.session.update(t);
 			this.transaction.commit();
 
@@ -74,7 +72,6 @@ public class CategorieDAO implements ICrud<Categorie> {
 			Categorie cToDelete = this.getById(id);
 
 			if(cToDelete != null) {
-			this.transaction.begin();
 			this.session.delete(cToDelete);
 			this.transaction.commit();
 			} else {

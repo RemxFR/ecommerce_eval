@@ -22,8 +22,6 @@ public class AuthenticationService {
 
 		System.out.println("------Authenticate Client -----");
 		String mdp = null;
-		Utilisateur registeredClient = null;
-
 		Utilisateur utilisateur = utilisateurDAO.getByMail(utilisateurDTO.getEmail());
 
 		if (utilisateur == null) {
@@ -37,19 +35,8 @@ public class AuthenticationService {
 				utilisateur = null;
 			}
 
-			System.out.println("-----Reformat de la date-----");
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE);
-			String utilisateurDateNaissance = dateFormat.format(utilisateur.getDateNaissance());
-			Date parsedDate = dateFormat.parse(utilisateurDateNaissance);
-			System.out.println("date string: " + utilisateurDateNaissance);
-
-			utilisateur.setDateNaissance(parsedDate);
-			System.out.println("-----Date de naissance----- -> " + utilisateur.getDateNaissance());
-			utilisateur.setActif(true);
-
-			registeredClient = utilisateur;
 		}
-		return registeredClient;
+		return utilisateur;
 	}
 
 }

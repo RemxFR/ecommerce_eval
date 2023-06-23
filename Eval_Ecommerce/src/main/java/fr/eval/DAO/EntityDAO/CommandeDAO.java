@@ -19,7 +19,6 @@ public class CommandeDAO implements ICrud<Commande> {
 
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
 			this.session.save(t);
 			this.transaction.commit();
 
@@ -54,7 +53,6 @@ public class CommandeDAO implements ICrud<Commande> {
 		try {
 			this.session = ConnexionBdd.getSession();
 			this.transaction = this.session.beginTransaction();
-			this.transaction.begin();
 			this.session.update(t);
 			this.transaction.commit();
 
@@ -75,7 +73,6 @@ public class CommandeDAO implements ICrud<Commande> {
 			Commande cToDelete = this.getById(id);
 			
 			if(cToDelete != null) {
-			this.transaction.begin();
 			this.session.delete(cToDelete);
 			this.transaction.commit();
 			} else {

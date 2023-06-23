@@ -76,7 +76,6 @@ public class UtilisateurDAO implements ICrud<Utilisateur> {
 		try {
 			this.session = ConnexionBdd.getSession();
 			transaction = this.session.beginTransaction();
-			transaction.begin();
 			this.session.update(t);
 			transaction.commit();
 
@@ -98,7 +97,6 @@ public class UtilisateurDAO implements ICrud<Utilisateur> {
 			Utilisateur uToDelete = this.getById(id);
 
 			if (uToDelete != null) {
-				transaction.begin();
 				this.session.delete(uToDelete);
 				transaction.commit();
 			} else {

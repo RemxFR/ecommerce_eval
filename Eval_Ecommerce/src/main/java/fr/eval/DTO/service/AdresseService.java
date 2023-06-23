@@ -37,7 +37,7 @@ public class AdresseService {
 			
 			adress = AdressConverter.convertAdressDtoEnAdress(adressDTO);
 			adress.setUtilisateur(utilisateur);
-			
+			System.out.println("Adresse: " + adress);
 			this.adressDAO.add(adress);
 			
 		} catch (Exception e) {

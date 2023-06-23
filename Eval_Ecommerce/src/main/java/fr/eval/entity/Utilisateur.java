@@ -68,7 +68,7 @@ public class Utilisateur {
 	@Column(name = "telephone", length = 10)
 	private String telephone;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "utilisateur")
 	@JoinColumn(name = "adresse_id", referencedColumnName = "id")
 	private Adress adresse;
 	
