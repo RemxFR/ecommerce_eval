@@ -22,7 +22,7 @@ public final class UtilisateurConverter {
 		dto.setNom(utilisateur.getNom());
 		dto.setPrenom(utilisateur.getPrenom());
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
 		String dateNaissance = dateFormat.format(utilisateur.getDateNaissance());
 
 		dto.setDateNaissance(dateNaissance);
@@ -39,7 +39,7 @@ public final class UtilisateurConverter {
 		utilisateur.setNom(dto.getNom());
 		utilisateur.setPrenom(dto.getPrenom());
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
 		Date dateNaissance = dateFormat.parse(dto.getDateNaissance());
 
 		utilisateur.setDateNaissance(dateNaissance);

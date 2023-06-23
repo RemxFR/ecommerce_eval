@@ -33,7 +33,7 @@ public class UtilisateurService {
 		utilisateur.setNom(utilisateurDTO.getNom());
 		utilisateur.setPrenom(utilisateurDTO.getPrenom());
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date dateNaissance = dateFormat.parse(utilisateurDTO.getDateNaissance());
 
 		utilisateur.setDateNaissance(dateNaissance);
