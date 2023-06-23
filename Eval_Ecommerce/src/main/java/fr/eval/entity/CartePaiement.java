@@ -18,6 +18,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_carte_paiement")
 @NamedQueries ({
@@ -48,6 +50,7 @@ public class CartePaiement {
 	columnDefinition = "TINYBLOB")
 	private byte[] cryptogramme;
 	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "utilisateur_id", 
 	referencedColumnName = "id")

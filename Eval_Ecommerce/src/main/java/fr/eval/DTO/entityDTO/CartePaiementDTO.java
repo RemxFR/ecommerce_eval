@@ -10,7 +10,7 @@ public class CartePaiementDTO {
 	
 	private String numero;
 	
-	private Date dateFinValidite;
+	private String dateFinValidite;
 	
 	private String cryptogramme;
 	
@@ -19,7 +19,7 @@ public class CartePaiementDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CartePaiementDTO(String nomProprietaire, String numero, Date dateFinValidite, String cryptogramme) {
+	public CartePaiementDTO(String nomProprietaire, String numero, String dateFinValidite, String cryptogramme) {
 		super();
 		this.nomProprietaire = nomProprietaire;
 		this.numero = numero;
@@ -51,11 +51,11 @@ public class CartePaiementDTO {
 		this.numero = numero;
 	}
 
-	public Date getDateFinValidite() {
+	public String getDateFinValidite() {
 		return dateFinValidite;
 	}
 
-	public void setDateFinValidite(Date dateFinValidite) {
+	public void setDateFinValidite(String dateFinValidite) {
 		this.dateFinValidite = dateFinValidite;
 	}
 

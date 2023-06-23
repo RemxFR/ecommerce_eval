@@ -1,6 +1,7 @@
 package fr.eval.DTO.service;
 
 import fr.eval.DAO.EntityDAO.CartePaiementDAO;
+import fr.eval.DAO.EntityDAO.UtilisateurDAO;
 import fr.eval.DTO.entityDTO.CartePaiementDTO;
 import fr.eval.DTO.service.conversions.CartePaiementConverter;
 import fr.eval.entity.CartePaiement;
@@ -9,7 +10,8 @@ import fr.eval.entity.Utilisateur;
 public class CartePaiementService {
 
 	private CartePaiementDAO cartePaiementDAO = new CartePaiementDAO();
-	private UtilisateurService utilisateurService = new UtilisateurService();
+//	private UtilisateurService utilisateurService = new UtilisateurService();
+	private UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
 	public void addCp(CartePaiementDTO cartePaiementDTO, long id) {
 
@@ -23,7 +25,7 @@ public class CartePaiementService {
 			}
 
 			if (id > 0 & (Long) id != null) {
-				utilisateur = this.utilisateurService.getUtilisateurById(id);
+				utilisateur = this.utilisateurDAO.getById(id);
 				if (utilisateur != null) {
 					cartePaiement.setUtilisateur(utilisateur);
 					this.cartePaiementDAO.add(cartePaiement);

@@ -1,5 +1,8 @@
 package fr.eval.DTO.service.conversions;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import fr.eval.DTO.entityDTO.CartePaiementDTO;
 import fr.eval.DTO.service.ChiffrageUtilisateurEtCp;
 import fr.eval.entity.CartePaiement;
@@ -15,7 +18,9 @@ public final class CartePaiementConverter {
 		
 		CartePaiement cartePaiement = new CartePaiement();
 		cartePaiement.setNomProprietaire(cartePaiementDTO.getNomProprietaire());
-		cartePaiement.setDateFinValidite(cartePaiementDTO.getDateFinValidite());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Date dateFinDeValidite = dateFormat.parse(cartePaiementDTO.getDateFinValidite());
+		cartePaiement.setDateFinValidite(dateFinDeValidite);
 		cartePaiement.setNumero(ChiffrageUtilisateurEtCp.chiffrageNumCP(cartePaiementDTO));
 		cartePaiement.setCryptogramme(ChiffrageUtilisateurEtCp.chiffrageCryptoCP(cartePaiementDTO));
 		
@@ -26,7 +31,9 @@ public final class CartePaiementConverter {
 		
 		CartePaiementDTO cartePaiementDTO = new CartePaiementDTO();
 		cartePaiementDTO.setNomProprietaire(cartePaiement.getNomProprietaire());
-		cartePaiementDTO.setDateFinValidite(cartePaiement.getDateFinValidite());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		String dateFinDeValidite = dateFormat.format(cartePaiement.getDateFinValidite());
+		cartePaiementDTO.setDateFinValidite(dateFinDeValidite);
 		cartePaiementDTO.setNumero(ChiffrageUtilisateurEtCp.dechiffrageNumCP(cartePaiement));
 		cartePaiementDTO.setCryptogramme(ChiffrageUtilisateurEtCp.dechiffrageCryptoCP(cartePaiement));
 		
@@ -36,7 +43,9 @@ public final class CartePaiementConverter {
 	public static CartePaiement updatecpFromCpDto(CartePaiementDTO cartePaiementDTO, CartePaiement cartePaiement) throws Exception {
 		
 		cartePaiement.setNomProprietaire(cartePaiementDTO.getNomProprietaire());
-		cartePaiement.setDateFinValidite(cartePaiementDTO.getDateFinValidite());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Date dateFinDeValidite = dateFormat.parse(cartePaiementDTO.getDateFinValidite());
+		cartePaiement.setDateFinValidite(dateFinDeValidite);
 		cartePaiement.setNumero(ChiffrageUtilisateurEtCp.chiffrageNumCP(cartePaiementDTO));
 		cartePaiement.setCryptogramme(ChiffrageUtilisateurEtCp.chiffrageCryptoCP(cartePaiementDTO));
 		

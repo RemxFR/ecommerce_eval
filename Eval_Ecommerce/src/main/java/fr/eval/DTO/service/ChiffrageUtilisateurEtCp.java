@@ -43,7 +43,7 @@ public class ChiffrageUtilisateurEtCp {
 	public static byte[] chiffrageNumCP(CartePaiementDTO cpDTO) throws Exception {
 
 		paramsDAO = new ParamsDAO();
-		key = paramsDAO.getCleDeChiffrageMdp();
+		key = paramsDAO.getCleDeChiffrageCp();
 
 		byte[] numChiffre = ChiffrageAES.chiffrage(cpDTO.getNumero(), key);
 
@@ -54,7 +54,7 @@ public class ChiffrageUtilisateurEtCp {
 
 		CartePaiementDTO cartePaiementDTO = null;
 		paramsDAO = new ParamsDAO();
-		key = paramsDAO.getCleDeChiffrageMdp();
+		key = paramsDAO.getCleDeChiffrageCp();
 
 		String numDechiffre = ChiffrageAES.dechiffrage(cartePaiement.getNumero(), key);
 
@@ -65,7 +65,7 @@ public class ChiffrageUtilisateurEtCp {
 
 		CartePaiement cartePaiement = null;
 		paramsDAO = new ParamsDAO();
-		key = paramsDAO.getCleDeChiffrageMdp();
+		key = paramsDAO.getCleDeChiffrageCp();
 
 		byte[] cryptoChiffre = ChiffrageAES.chiffrage(cpDTO.getCryptogramme(), key);
 
@@ -76,7 +76,7 @@ public class ChiffrageUtilisateurEtCp {
 
 		CartePaiementDTO cartePaiementDTO = null;
 		paramsDAO = new ParamsDAO();
-		key = paramsDAO.getCleDeChiffrageMdp();
+		key = paramsDAO.getCleDeChiffrageCp();
 
 		String cryptoDechiffre = ChiffrageAES.dechiffrage(cartePaiement.getCryptogramme(), key);
 

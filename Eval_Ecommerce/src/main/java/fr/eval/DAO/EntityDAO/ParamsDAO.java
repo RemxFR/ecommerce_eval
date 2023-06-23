@@ -33,8 +33,13 @@ public class ParamsDAO {
 				this.params.setCle_cryptage_cp(key.getEncoded());
 				session.save(this.params);
 				transaction.commit();
-				this.session.close();
 				return key;
+			} else {
+				Key key = GenerateKey.getKey(this.ALGO, this.KEYSIZE);
+				transaction = this.session.beginTransaction();
+				this.params.setCle_cryptage_cp(key.getEncoded());
+				session.update(this.params);
+				transaction.commit();
 			}
 
 		} catch (RollbackException e) {
@@ -62,7 +67,13 @@ public class ParamsDAO {
 				this.params.setCle_cryptage_mdp(key.getEncoded());
 				session.save(this.params);
 				transaction.commit();
-				this.session.close();
+				return key;
+			} else {
+				Key key = GenerateKey.getKey(this.ALGO, this.KEYSIZE);
+				transaction = this.session.beginTransaction();
+				this.params.setCle_cryptage_mdp(key.getEncoded());
+				session.update(this.params);
+				transaction.commit();
 				return key;
 			}
 
