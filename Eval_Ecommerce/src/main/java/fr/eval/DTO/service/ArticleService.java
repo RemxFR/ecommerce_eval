@@ -4,14 +4,17 @@ import java.util.List;
 import java.util.Map;
 
 import fr.eval.DAO.EntityDAO.ArticleDAO;
+import fr.eval.DAO.EntityDAO.CategorieDAO;
 import fr.eval.DTO.entityDTO.ArticleDTO;
 import fr.eval.DTO.service.conversions.ArticleConverter;
 import fr.eval.entity.Article;
+import fr.eval.entity.Categorie;
 import fr.eval.entity.Commentaire;
 
 public class ArticleService {
 
 	private ArticleDAO articleDAO = new ArticleDAO();
+	private CategorieDAO categorieDAO = new CategorieDAO();
 
 	public ArticleService() {
 		super();
@@ -29,10 +32,24 @@ public class ArticleService {
 		return null;
 	}
 
-	public void addArticle(Article article) {
+	public void addArticle(Article article, long id) {
 
+		Categorie categorie = null;
+		
 		try {
 
+			if(id > 0 && (Long) id != null) {
+				categorie = this.categorieDAO.getById(id);
+				if(categorie != null) {
+					article.setCategorie(categorie);
+				} else {
+					System.out.println("Categorie inexistante...");
+				}
+			} else {
+				System.out.println("L'id doit être un chiffre > 0...");
+			}
+			
+			
 			if (article != null) {
 				this.articleDAO.add(article);
 			} else {

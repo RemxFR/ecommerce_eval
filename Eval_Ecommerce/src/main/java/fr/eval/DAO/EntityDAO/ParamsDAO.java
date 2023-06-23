@@ -25,8 +25,17 @@ public class ParamsDAO {
 
 			this.session = ConnexionBdd.getSession();
 			this.params = this.session.find(Params.class, (long) 1);
-			
-			if (this.params == null) {
+
+			if (this.params != null) {
+
+				if (this.params.getCle_cryptage_cp() == null) {
+					Key key = GenerateKey.getKey(this.ALGO, this.KEYSIZE);
+					transaction = this.session.beginTransaction();
+					this.params.setCle_cryptage_cp(key.getEncoded());
+					session.saveOrUpdate(this.params);
+					transaction.commit();
+				}
+			} else {
 				this.params = new Params();
 				Key key = GenerateKey.getKey(this.ALGO, this.KEYSIZE);
 				transaction = this.session.beginTransaction();
@@ -34,12 +43,6 @@ public class ParamsDAO {
 				session.save(this.params);
 				transaction.commit();
 				return key;
-			} else {
-				Key key = GenerateKey.getKey(this.ALGO, this.KEYSIZE);
-				transaction = this.session.beginTransaction();
-				this.params.setCle_cryptage_cp(key.getEncoded());
-				session.update(this.params);
-				transaction.commit();
 			}
 
 		} catch (RollbackException e) {
@@ -60,19 +63,22 @@ public class ParamsDAO {
 			this.session = ConnexionBdd.getSession();
 			this.params = this.session.find(Params.class, (long) 1);
 
-			if (this.params == null) {
+			if (this.params != null) {
+				if (this.params.getCle_cryptage_mdp() == null) {
+					Key key = GenerateKey.getKey(this.ALGO, this.KEYSIZE);
+					transaction = this.session.beginTransaction();
+					this.params.setCle_cryptage_mdp(key.getEncoded());
+					session.saveOrUpdate(this.params);
+					transaction.commit();
+					return key;
+				}
+
+			} else {
 				this.params = new Params();
 				Key key = GenerateKey.getKey(this.ALGO, this.KEYSIZE);
 				transaction = this.session.beginTransaction();
 				this.params.setCle_cryptage_mdp(key.getEncoded());
 				session.save(this.params);
-				transaction.commit();
-				return key;
-			} else {
-				Key key = GenerateKey.getKey(this.ALGO, this.KEYSIZE);
-				transaction = this.session.beginTransaction();
-				this.params.setCle_cryptage_mdp(key.getEncoded());
-				session.update(this.params);
 				transaction.commit();
 				return key;
 			}

@@ -53,9 +53,6 @@ public class UtilisateurService {
 		utilisateur.setPassword(ChiffrageUtilisateurEtCp.chiffrageMDP(utilisateurDTO.getPassword()));
 		utilisateur.setTelephone(utilisateurDTO.getTelephone());
 		
-		Adress adresse = new Adress();
-		utilisateur.setAdresse(adresse);
-
 		Set<Commande> commandes = new HashSet<>();
 		utilisateur.setCommandes(commandes);
 

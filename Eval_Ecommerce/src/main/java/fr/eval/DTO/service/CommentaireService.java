@@ -23,12 +23,24 @@ public class CommentaireService {
 		return commentaires;
 	}
 
-	public void addCommentaire(Commentaire commentaire) {
-
+	public void addCommentaire(Commentaire commentaire, long id) {
+		Article article = null;
 		try {
-
 			if (commentaire != null) {
+				
+				if (id > 0 && (Long) id != null) {
+					article = this.articleDAO.getById(id);
+					if (article != null) {
+						commentaire.setArticle(article);
+					} else {
+						System.out.println("Article inexistant...");
+					}
+				} else {
+					System.out.println("L'id doit être un chiffre strictement supérieur à 0...");
+				}
+
 				this.commentaireDAO.add(commentaire);
+				
 			} else {
 				System.out.println("Un commentaire ne peut pas être nul...");
 			}
@@ -90,12 +102,12 @@ public class CommentaireService {
 		try {
 
 			commentaire = this.getCommentaireById(id);
-			if(commentaire != null) {
+			if (commentaire != null) {
 				this.commentaireDAO.deleteById(id);
 			} else {
 				System.out.println("Suppression du commentaire impossible car id inexistant...");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

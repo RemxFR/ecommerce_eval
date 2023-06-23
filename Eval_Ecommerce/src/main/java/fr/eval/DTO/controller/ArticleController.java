@@ -27,12 +27,12 @@ public class ArticleController {
 	
 	@POST
 	@RolesAllowed({"MAGASINIER", "ADMIN"})
-	@Path("add")
+	@Path("add-{id}")
 	@Produces(value = MediaType.APPLICATION_JSON + CHARSET)
 	@Consumes(value = MediaType.APPLICATION_JSON + CHARSET)
-	public Response addArticle(Article article) throws Exception {
+	public Response addArticle(Article article, @PathParam("id") long id) throws Exception {
 		
-		articleService.addArticle(article);
+		articleService.addArticle(article, id);
 		
 		return Response.status(Status.CREATED.getStatusCode(), "Création de l'article réussie !")
 				.entity(article)

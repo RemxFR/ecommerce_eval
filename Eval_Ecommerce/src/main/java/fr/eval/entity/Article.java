@@ -37,7 +37,7 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "nom", length = 25)
+	@Column(name = "nom", length = 100)
 	private String nom;
 	
 	@Column(name = "description", length = 250)
