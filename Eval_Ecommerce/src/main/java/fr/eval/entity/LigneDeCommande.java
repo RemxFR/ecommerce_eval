@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_ligne_de_commande")
 @NamedQueries ({
@@ -34,6 +36,7 @@ public class LigneDeCommande {
 	@Column(name = "remiseArticle")
 	private int remiseArticle;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "commande_id")
 	private Commande commande;

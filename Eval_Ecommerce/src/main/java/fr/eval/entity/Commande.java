@@ -21,6 +21,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_commande")
 @NamedQueries ({
@@ -62,6 +64,7 @@ public class Commande {
 	@OneToOne
 	private CartePaiement cpDefaut;
 	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "utilisateur_id", referencedColumnName = "id")
 	private Utilisateur utilisateur;

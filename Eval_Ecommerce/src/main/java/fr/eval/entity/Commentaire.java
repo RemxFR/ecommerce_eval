@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_commentaire")
 @NamedQueries({ @NamedQuery(name = "Commentaire::FindCommentaireById", query = "FROM Commentaire c WHERE id= :id"),
@@ -31,10 +33,12 @@ public class Commentaire {
 	@Column(name = "note")
 	private int note;
 
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "article_id", referencedColumnName = "id")
 	private Article article;
 
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "utilisateur_id", referencedColumnName = "id")
 	private Utilisateur utilisateur;

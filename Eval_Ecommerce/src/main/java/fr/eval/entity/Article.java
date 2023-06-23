@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @XmlRootElement(name="article")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
@@ -65,6 +67,7 @@ public class Article {
 	@Column(name = "commentaires")
 	private Set<Commentaire> commentaires;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "categorie_id", referencedColumnName = "id")
 	private Categorie categorie;
